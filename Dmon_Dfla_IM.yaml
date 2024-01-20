@@ -1,0 +1,20 @@
+description: 'A simplified model of the speciation history of D. montana and D. flavomontana'
+# Comments start with a hash.
+time_units: generations
+demes:
+  - name: ancestor
+    epochs:
+      - end_time: 2526000
+        start_size: 1388000
+  - name: Dmontana
+    ancestors: [ancestor]
+    epochs:
+      - start_size: 735000
+  - name: Dflavomontana
+    ancestors: [ancestor]
+    epochs:
+      - start_size: 377000
+migrations:
+  - source: Dmontana
+    dest: Dflavomontana
+    rate: 1.29e-8
