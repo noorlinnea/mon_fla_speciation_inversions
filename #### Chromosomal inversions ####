@@ -1,0 +1,1327 @@
+#### Chromosomal inversions Poikela et al. 2024 ####
+
+#### CHROMOSOMAL INVERSIONS ####
+
+#### Identify structural variants with PacBio long-read data ####
+
+## ngmlr mapping
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa -q 0_reads/Dlummei.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/Dlummei.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa -q 0_reads/monSE13F37.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/monSE13F37.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa -q 0_reads/monJX13F48.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/monJX13F48.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa -q 0_reads/flaMT13F11.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/flaMT13F11.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa -q 0_reads/flaVAN14F20.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/flaVAN14F20.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sorted.bam
+
+## Sniffles
+sniffles --threads 20 -m Dlummei.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sorted.bam -v Dlummei.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m monSE13F37.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sorted.bam -v monSE13F37.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m monJX13F48.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sorted.bam -v monJX13F48.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m flaMT13F11.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sorted.bam -v flaMT13F11.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m flaVAN14F20.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sorted.bam -v flaVAN14F20.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.vcf
+
+
+## ngmlr mapping
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa -q 0_reads/Dlummei.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/Dlummei.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa -q 0_reads/monSE13F37.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/monSE13F37.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa -q 0_reads/monJX13F48.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/monJX13F48.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa -q 0_reads/flaMT13F11.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/flaMT13F11.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa -q 0_reads/flaVAN14F20.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/flaVAN14F20.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sorted.bam
+
+## Sniffles
+sniffles --threads 20 -m Dlummei.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sorted.bam -v Dlummei.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m monSE13F37.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sorted.bam -v monSE13F37.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m monJX13F48.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sorted.bam -v monJX13F48.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m flaMT13F11.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sorted.bam -v flaMT13F11.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m flaVAN14F20.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sorted.bam -v flaVAN14F20.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.vcf
+
+
+## ngmlr mapping
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa -q 0_reads/Dlummei.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/Dlummei.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa -q 0_reads/monSE13F37.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/monSE13F37.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa -q 0_reads/monJX13F48.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/monJX13F48.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa -q 0_reads/flaMT13F11.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/flaMT13F11.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa -q 0_reads/flaVAN14F20.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/flaVAN14F20.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sorted.bam
+
+## Sniffles
+sniffles --threads 20 -m Dlummei.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sorted.bam -v Dlummei.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m monSE13F37.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sorted.bam -v monSE13F37.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m monJX13F48.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sorted.bam -v monJX13F48.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m flaMT13F11.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sorted.bam -v flaMT13F11.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m flaVAN14F20.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sorted.bam -v flaVAN14F20.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.vcf
+
+
+## ngmlr mapping
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa -q 0_reads/Dlummei.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/Dlummei.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa -q 0_reads/monSE13F37.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/monSE13F37.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa -q 0_reads/monJX13F48.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/monJX13F48.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa -q 0_reads/flaMT13F11.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/flaMT13F11.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sorted.bam
+ngmlr --rg-pu pacbiosequel --rg-pg nglmr --rg-cn EdGen -t 30 -x pacbio -r 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa -q 0_reads/flaVAN14F20.pacbio.fastq.gz | samtools view -b - | samtools sort -@30 - > /scratch/npoikela/flaVAN14F20.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sorted.bam
+
+## Sniffles
+sniffles --threads 20 -m Dlummei.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sorted.bam -v Dlummei.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m monSE13F37.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sorted.bam -v monSE13F37.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m monJX13F48.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sorted.bam -v monJX13F48.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m flaMT13F11.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sorted.bam -v flaMT13F11.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.vcf
+sniffles --threads 20 -m flaVAN14F20.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sorted.bam -v flaVAN14F20.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.vcf
+
+
+#### Identify structural variants with Illumina short-read data ####
+
+## Map short-reads against flaVAN14F20 assembly
+bwa mem -R "@RG\tID:monJX13F48.112\tSM:monJX13F48\tPL:ILLUMINA\tPU:monJX13F48.112\tLB:monJX13F48.112\tDS:monJX13F48.112" -t 16 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa 0_reads/monJX13F48.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-003_NX-P5-017_1.fastq.gz 0_reads/monJX13F48.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-003_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monJX13F48.112.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monJX13F48.112.vs.flaMT13F11.ctg.v0.unmasked.bam /scratch/npoikela/monJX13F48.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monJX13F48.120\tSM:monJX13F48\tPL:ILLUMINA\tPU:monJX13F48.120\tLB:monJX13F48.120\tDS:monJX13F48.120" -t 16 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa 0_reads/monJX13F48.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-003_NX-P5-017_1.fastq.gz 0_reads/monJX13F48.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-003_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monJX13F48.120.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monJX13F48.120.vs.flaMT13F11.ctg.v0.unmasked.bam /scratch/npoikela/monJX13F48.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /scratch/npoikela/monJX13F48.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /scratch/npoikela/monJX13F48.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaVAN14F20.112\tSM:flaVAN14F20\tPL:ILLUMINA\tPU:flaVAN14F20.112\tLB:flaVAN14F20.112\tDS:flaVAN14F20.112" -t 16 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa 0_reads/VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_1.fastq.gz 0_reads/VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaVAN14F20.112.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaVAN14F20.112.vs.flaMT13F11.ctg.v0.unmasked.bam /scratch/npoikela/flaVAN14F20.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaVAN14F20.120\tSM:flaVAN14F20\tPL:ILLUMINA\tPU:flaVAN14F20.120\tLB:flaVAN14F20.120\tDS:flaVAN14F20.120" -t 16 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa 0_reads/VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_1.fastq.gz 0_reads/VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaVAN14F20.120.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaVAN14F20.120.vs.flaMT13F11.ctg.v0.unmasked.bam /scratch/npoikela/flaVAN14F20.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/flaVAN14F20.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaVAN14F20.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaVAN14F20.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/flaVAN14F20.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/flaVAN14F20.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaMT13F11.112\tSM:flaMT13F11\tPL:ILLUMINA\tPU:flaMT13F11.112\tLB:flaMT13F11.112\tDS:flaMT13F11.112" -t 16 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa 0_reads/MT13F11_170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-002_1.fastq.gz 0_reads/MT13F11_170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-002_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaMT13F11.112.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaMT13F11.112.vs.flaMT13F11.ctg.v0.unmasked.bam /scratch/npoikela/flaMT13F11.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaMT13F11.120\tSM:flaMT13F11\tPL:ILLUMINA\tPU:flaMT13F11.120\tLB:flaMT13F11.120\tDS:flaMT13F11.120" -t 16 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa 0_reads/MT13F11_170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-002_1.fastq.gz 0_reads/MT13F11_170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-002_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaMT13F11.120.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaMT13F11.120.vs.flaMT13F11.ctg.v0.unmasked.bam /scratch/npoikela/flaMT13F11.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/flaMT13F11.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaMT13F11.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaMT13F11.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/flaMT13F11.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/flaMT13F11.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monSE13F37\tSM:monSE13F37\tPL:ILLUMINA\tPU:monSE13F37\tLB:monSE13F37\tDS:monSE13F37" -t 40 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa 0_reads/monSE13F37_illumina_R1.fastq.gz 0_reads/monSE13F37_illumina_R2.fastq.gz | samtools sort -@40 -o /scratch/npoikela/monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup -t 40 /scratch/npoikela/monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.bam /scratch/npoikela/monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.MD.bam --tmpdir=markdup --hash-table-size=400000 --overflow-list-size=400000 && rsync /scratch/npoikela/monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monVAN14F1.112\tSM:monVAN14F1\tPL:ILLUMINA\tPU:monVAN14F1.112\tLB:monVAN14F1.112\tDS:monVAN14F1.112" -t 16 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa 0_reads/monVAN14F1.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-002_NX-P5-017_1.fastq.gz 0_reads/monVAN14F1.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-002_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monVAN14F1.112.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monVAN14F1.112.vs.flaMT13F11.ctg.v0.unmasked.bam /scratch/npoikela/monVAN14F1.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monVAN14F1.120\tSM:monVAN14F1\tPL:ILLUMINA\tPU:monVAN14F1.120\tLB:monVAN14F1.120\tDS:monVAN14F1.120" -t 16 5_freeze_v0/flaMT13F11.ctg.v0.unmasked.fa 0_reads/monVAN14F1.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-002_NX-P5-017_1.fastq.gz 0_reads/monVAN14F1.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-002_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monVAN14F1.120.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monVAN14F1.120.vs.flaMT13F11.ctg.v0.unmasked.bam /scratch/npoikela/monVAN14F1.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/monVAN14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /scratch/npoikela/monVAN14F1.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /scratch/npoikela/monVAN14F1.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/monVAN14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monVAN14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:fla3Fall\tSM:fla3Fall\tPL:ILLUMINA\tPU:fla3Fall\tLB:fla3Fall\tDS:fla3Fall" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/fla3Fall.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/fla3Fall.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/fla3Fall.mapping.temp -o fla3Fall.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/fla3Fall.markdup.temp -t 16 fla3Fall.vs.flaMT13F11.ctg.v0.unmasked.bam fla3Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index fla3Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaASH13F2.112\tSM:flaASH13F2\tPL:ILLUMINA\tPU:flaASH13F2.112\tLB:flaASH13F2.112\tDS:flaASH13F2.112" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaASH13F2.112.mapping.temp -o flaASH13F2.112.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaASH13F2.112.markdup.temp -t 16 flaASH13F2.112.vs.flaMT13F11.ctg.v0.unmasked.bam flaASH13F2.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaASH13F2.120\tSM:flaASH13F2\tPL:ILLUMINA\tPU:flaASH13F2.120\tLB:flaASH13F2.120\tDS:flaASH13F2.120" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaASH13F2.120.mapping.temp -o flaASH13F2.120.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaASH13F2.120.markdup.temp -t 16 flaASH13F2.120.vs.flaMT13F11.ctg.v0.unmasked.bam flaASH13F2.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+samtools merge flaASH13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.bam flaASH13F2.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam flaASH13F2.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index flaASH13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaASH13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.bam O=flaASH13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam RGID=flaASH13F2 RGLB=flaASH13F2 RGPL=ILLUMINA RGPU=flaASH13F2 RGSM=flaASH13F2
+
+bwa mem -R "@RG\tID:flaJX13F31.112\tSM:flaJX13F31\tPL:ILLUMINA\tPU:flaJX13F31.112\tLB:flaJX13F31.112\tDS:flaJX13F31.112" -t 16 flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaJX13F31.112.mapping.temp -o flaJX13F31.112.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaJX13F31.112.markdup.temp -t 16 flaJX13F31.112.vs.flaMT13F11.ctg.v0.unmasked.bam flaJX13F31.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaJX13F31.120\tSM:flaJX13F31\tPL:ILLUMINA\tPU:flaJX13F31.120\tLB:flaJX13F31.120\tDS:flaJX13F31.120" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaJX13F31.120.mapping.temp -o flaJX13F31.120.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaJX13F31.120.markdup.temp -t 16 flaJX13F31.120.vs.flaMT13F11.ctg.v0.unmasked.bam flaJX13F31.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+samtools merge flaJX13F31.vs.flaMT13F11.ctg.v0.unmasked.MD.bam flaJX13F31.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam flaJX13F31.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index flaJX13F31.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaJX13F31.vs.flaMT13F11.ctg.v0.unmasked.MD.bam O=flaJX13F31.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam RGID=flaJX13F31 RGLB=flaJX13F31 RGPL=ILLUMINA RGPU=flaJX13F31 RGSM=flaJX13F31
+
+bwa mem -R "@RG\tID:flaCRAN14F7\tSM:flaCRAN14F7\tPL:ILLUMINA\tPU:flaCRAN14F7\tLB:flaCRAN14F7\tDS:flaCRAN14F7" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaCRAN14F7.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaCRAN14F7.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaCRAN14F7.mapping.temp -o flaCRAN14F7.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaCRAN14F7.markdup.temp -t 16 flaCRAN14F7.vs.flaMT13F11.ctg.v0.unmasked.bam flaCRAN14F7.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index flaCRAN14F7.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaLB15F3.112\tSM:flaLB15F3\tPL:ILLUMINA\tPU:flaLB15F3.112\tLB:flaLB15F3.112\tDS:flaLB15F3.112" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaLB15F3.112.mapping.temp -o flaLB15F3.112.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaLB15F3.112.markdup.temp -t 16 flaLB15F3.112.vs.flaMT13F11.ctg.v0.unmasked.bam flaLB15F3.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaLB15F3.120\tSM:flaLB15F3\tPL:ILLUMINA\tPU:flaLB15F3.120\tLB:flaLB15F3.120\tDS:flaLB15F3.120" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaLB15F3.120.mapping.temp -o flaLB15F3.120.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaLB15F3.120.markdup.temp -t 16 flaLB15F3.120.vs.flaMT13F11.ctg.v0.unmasked.bam flaLB15F3.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+samtools merge flaLB15F3.vs.flaMT13F11.ctg.v0.unmasked.MD.bam flaLB15F3.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam flaLB15F3.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index flaLB15F3.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaLB15F3.vs.flaMT13F11.ctg.v0.unmasked.MD.bam O=flaLB15F3.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam RGID=flaLB15F3 RGLB=flaLB15F3 RGPL=ILLUMINA RGPU=flaLB15F3 RGSM=flaLB15F3
+
+bwa mem -R "@RG\tID:flaMB14F10\tSM:flaMB14F10\tPL:ILLUMINA\tPU:flaMB14F10\tLB:flaMB14F10\tDS:flaMB14F10" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaMB14F10.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaMB14F10.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaMB14F10.mapping.temp -o flaMB14F10.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaMB14F10.markdup.temp -t 16 flaMB14F10.vs.flaMT13F11.ctg.v0.unmasked.bam flaMB14F10.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index flaMB14F10.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaTER14F5\tSM:flaTER14F5\tPL:ILLUMINA\tPU:flaTER14F5\tLB:flaTER14F5\tDS:flaTER14F5" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaTER14F5.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaTER14F5.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaTER14F5.mapping.temp -o flaTER14F5.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaTER14F5.markdup.temp -t 16 flaTER14F5.vs.flaMT13F11.ctg.v0.unmasked.bam flaTER14F5.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index flaTER14F5.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monAF15F28.112\tSM:monAF15F28\tPL:ILLUMINA\tPU:monAF15F28.112\tLB:monAF15F28.112\tDS:monAF15F28.112" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAF15F28.112.mapping.temp -o monAF15F28.112.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAF15F28.112.markdup.temp -t 16 monAF15F28.112.vs.flaMT13F11.ctg.v0.unmasked.bam monAF15F28.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monAF15F28.120\tSM:monAF15F28\tPL:ILLUMINA\tPU:monAF15F28.120\tLB:monAF15F28.120\tDS:monAF15F28.120" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAF15F28.120.mapping.temp -o monAF15F28.120.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAF15F28.120.markdup.temp -t 16 monAF15F28.120.vs.flaMT13F11.ctg.v0.unmasked.bam monAF15F28.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+samtools merge monAF15F28.vs.flaMT13F11.ctg.v0.unmasked.MD.bam monAF15F28.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam monAF15F28.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index monAF15F28.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=monAF15F28.vs.flaMT13F11.ctg.v0.unmasked.MD.bam O=monAF15F28.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam RGID=monAF15F28 RGLB=monAF15F28 RGPL=ILLUMINA RGPU=monAF15F28 RGSM=monAF15F28
+
+bwa mem -R "@RG\tID:mon4Fall\tSM:mon4Fall\tPL:ILLUMINA\tPU:mon4Fall\tLB:mon4Fall\tDS:mon4Fall" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/mon4Fall.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/mon4Fall.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/mon4Fall.mapping.temp -o mon4Fall.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/mon4Fall.markdup.temp -t 16 mon4Fall.vs.flaMT13F11.ctg.v0.unmasked.bam mon4Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index mon4Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monASH13F13.112\tSM:monASH13F13\tPL:ILLUMINA\tPU:monASH13F13.112\tLB:monASH13F13.112\tDS:monASH13F13.112" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monASH13F13.112.mapping.temp -o monASH13F13.112.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monASH13F13.112.markdup.temp -t 16 monASH13F13.112.vs.flaMT13F11.ctg.v0.unmasked.bam monASH13F13.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monASH13F13.120\tSM:monASH13F13\tPL:ILLUMINA\tPU:monASH13F13.120\tLB:monASH13F13.120\tDS:monASH13F13.120" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monASH13F13.120.mapping.temp -o monASH13F13.120.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monASH13F13.120.markdup.temp -t 16 monASH13F13.120.vs.flaMT13F11.ctg.v0.unmasked.bam monASH13F13.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+samtools merge monASH13F13.vs.flaMT13F11.ctg.v0.unmasked.MD.bam monASH13F13.112.vs.flaMT13F11.ctg.v0.unmasked.MD.bam monASH13F13.120.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index monASH13F13.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=monASH13F13.vs.flaMT13F11.ctg.v0.unmasked.MD.bam O=monASH13F13.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam RGID=monASH13F13 RGLB=monASH13F13 RGPL=ILLUMINA RGPU=monASH13F13 RGSM=monASH13F13
+
+bwa mem -R "@RG\tID:monAZA2\tSM:monAZA2\tPL:ILLUMINA\tPU:monAZA2\tLB:monAZA2\tDS:monAZA2" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAZA2.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAZA2.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAZA2.mapping.temp -o monAZA2.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAZA2.markdup.temp -t 16 monAZA2.vs.flaMT13F11.ctg.v0.unmasked.bam monAZA2.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index monAZA2.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monCRAN14F16\tSM:monCRAN14F16\tPL:ILLUMINA\tPU:monCRAN14F16\tLB:monCRAN14F16\tDS:monCRAN14F16" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monCRAN14F16.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monCRAN14F16.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monCRAN14F16.mapping.temp -o monCRAN14F16.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monCRAN14F16.markdup.temp -t 16 monCRAN14F16.vs.flaMT13F11.ctg.v0.unmasked.bam monCRAN14F16.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index monCRAN14F16.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monFA13F2\tSM:monFA13F2\tPL:ILLUMINA\tPU:monFA13F2\tLB:monFA13F2\tDS:monFA13F2" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monFA13F2.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monFA13F2.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monFA13F2.mapping.temp -o monFA13F2.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monFA13F2.markdup.temp -t 16 monFA13F2.vs.flaMT13F11.ctg.v0.unmasked.bam monFA13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index monFA13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monHO13F3\tSM:monHO13F3\tPL:ILLUMINA\tPU:monHO13F3\tLB:monHO13F3\tDS:monHO13F3" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monHO13F3.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monHO13F3.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monHO13F3.mapping.temp -o monHO13F3.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monHO13F3.markdup.temp -t 16 monHO13F3.vs.flaMT13F11.ctg.v0.unmasked.bam monHO13F3.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index monHO13F3.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monMB14F1\tSM:monMB14F1\tPL:ILLUMINA\tPU:monMB14F1\tLB:monMB14F1\tDS:monMB14F1" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monMB14F1.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monMB14F1.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monMB14F1.mapping.temp -o monMB14F1.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monMB14F1.markdup.temp -t 16 monMB14F1.vs.flaMT13F11.ctg.v0.unmasked.bam monMB14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index monMB14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monTER14F11\tSM:monTER14F11\tPL:ILLUMINA\tPU:monTER14F11\tLB:monTER14F11\tDS:monTER14F11" -t 16  flaMT13F11.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monTER14F11.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monTER14F11.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monTER14F11.mapping.temp -o monTER14F11.vs.flaMT13F11.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monTER14F11.markdup.temp -t 16 monTER14F11.vs.flaMT13F11.ctg.v0.unmasked.bam monTER14F11.vs.flaMT13F11.ctg.v0.unmasked.MD.bam && samtools index monTER14F11.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+
+
+
+## Map short-reads against flaVAN14F20 assembly
+bwa mem -R "@RG\tID:monJX13F48.112\tSM:monJX13F48\tPL:ILLUMINA\tPU:monJX13F48.112\tLB:monJX13F48.112\tDS:monJX13F48.112" -t 16 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa 0_reads/monJX13F48.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-003_NX-P5-017_1.fastq.gz 0_reads/monJX13F48.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-003_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monJX13F48.112.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monJX13F48.112.vs.flaVAN14F20.ctg.v0.unmasked.bam /scratch/npoikela/monJX13F48.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monJX13F48.120\tSM:monJX13F48\tPL:ILLUMINA\tPU:monJX13F48.120\tLB:monJX13F48.120\tDS:monJX13F48.120" -t 16 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa 0_reads/monJX13F48.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-003_NX-P5-017_1.fastq.gz 0_reads/monJX13F48.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-003_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monJX13F48.120.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monJX13F48.120.vs.flaVAN14F20.ctg.v0.unmasked.bam /scratch/npoikela/monJX13F48.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /scratch/npoikela/monJX13F48.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /scratch/npoikela/monJX13F48.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaVAN14F20.112\tSM:flaVAN14F20\tPL:ILLUMINA\tPU:flaVAN14F20.112\tLB:flaVAN14F20.112\tDS:flaVAN14F20.112" -t 16 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa 0_reads/VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_1.fastq.gz 0_reads/VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaVAN14F20.112.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaVAN14F20.112.vs.flaVAN14F20.ctg.v0.unmasked.bam /scratch/npoikela/flaVAN14F20.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaVAN14F20.120\tSM:flaVAN14F20\tPL:ILLUMINA\tPU:flaVAN14F20.120\tLB:flaVAN14F20.120\tDS:flaVAN14F20.120" -t 16 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa 0_reads/VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_1.fastq.gz 0_reads/VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaVAN14F20.120.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaVAN14F20.120.vs.flaVAN14F20.ctg.v0.unmasked.bam /scratch/npoikela/flaVAN14F20.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/flaVAN14F20.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaVAN14F20.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaVAN14F20.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/flaVAN14F20.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/flaVAN14F20.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaMT13F11.112\tSM:flaMT13F11\tPL:ILLUMINA\tPU:flaMT13F11.112\tLB:flaMT13F11.112\tDS:flaMT13F11.112" -t 16 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa 0_reads/MT13F11_170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-002_1.fastq.gz 0_reads/MT13F11_170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-002_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaMT13F11.112.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaMT13F11.112.vs.flaVAN14F20.ctg.v0.unmasked.bam /scratch/npoikela/flaMT13F11.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaMT13F11.120\tSM:flaMT13F11\tPL:ILLUMINA\tPU:flaMT13F11.120\tLB:flaMT13F11.120\tDS:flaMT13F11.120" -t 16 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa 0_reads/MT13F11_170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-002_1.fastq.gz 0_reads/MT13F11_170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-002_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaMT13F11.120.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaMT13F11.120.vs.flaVAN14F20.ctg.v0.unmasked.bam /scratch/npoikela/flaMT13F11.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/flaMT13F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaMT13F11.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaMT13F11.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/flaMT13F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/flaMT13F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monSE13F37\tSM:monSE13F37\tPL:ILLUMINA\tPU:monSE13F37\tLB:monSE13F37\tDS:monSE13F37" -t 40 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa 0_reads/monSE13F37_illumina_R1.fastq.gz 0_reads/monSE13F37_illumina_R2.fastq.gz | samtools sort -@40 -o /scratch/npoikela/monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup -t 40 /scratch/npoikela/monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.bam /scratch/npoikela/monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam --tmpdir=markdup --hash-table-size=400000 --overflow-list-size=400000 && rsync /scratch/npoikela/monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monVAN14F1.112\tSM:monVAN14F1\tPL:ILLUMINA\tPU:monVAN14F1.112\tLB:monVAN14F1.112\tDS:monVAN14F1.112" -t 16 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa 0_reads/monVAN14F1.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-002_NX-P5-017_1.fastq.gz 0_reads/monVAN14F1.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-002_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monVAN14F1.112.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monVAN14F1.112.vs.flaVAN14F20.ctg.v0.unmasked.bam /scratch/npoikela/monVAN14F1.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monVAN14F1.120\tSM:monVAN14F1\tPL:ILLUMINA\tPU:monVAN14F1.120\tLB:monVAN14F1.120\tDS:monVAN14F1.120" -t 16 5_freeze_v0/flaVAN14F20.ctg.v0.unmasked.fa 0_reads/monVAN14F1.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-002_NX-P5-017_1.fastq.gz 0_reads/monVAN14F1.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-002_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monVAN14F1.120.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monVAN14F1.120.vs.flaVAN14F20.ctg.v0.unmasked.bam /scratch/npoikela/monVAN14F1.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/monVAN14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /scratch/npoikela/monVAN14F1.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /scratch/npoikela/monVAN14F1.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/monVAN14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monVAN14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:fla3Fall\tSM:fla3Fall\tPL:ILLUMINA\tPU:fla3Fall\tLB:fla3Fall\tDS:fla3Fall" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/fla3Fall.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/fla3Fall.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/fla3Fall.mapping.temp -o fla3Fall.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/fla3Fall.markdup.temp -t 16 fla3Fall.vs.flaVAN14F20.ctg.v0.unmasked.bam fla3Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index fla3Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaASH13F2.112\tSM:flaASH13F2\tPL:ILLUMINA\tPU:flaASH13F2.112\tLB:flaASH13F2.112\tDS:flaASH13F2.112" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaASH13F2.112.mapping.temp -o flaASH13F2.112.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaASH13F2.112.markdup.temp -t 16 flaASH13F2.112.vs.flaVAN14F20.ctg.v0.unmasked.bam flaASH13F2.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaASH13F2.120\tSM:flaASH13F2\tPL:ILLUMINA\tPU:flaASH13F2.120\tLB:flaASH13F2.120\tDS:flaASH13F2.120" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaASH13F2.120.mapping.temp -o flaASH13F2.120.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaASH13F2.120.markdup.temp -t 16 flaASH13F2.120.vs.flaVAN14F20.ctg.v0.unmasked.bam flaASH13F2.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+samtools merge flaASH13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam flaASH13F2.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam flaASH13F2.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index flaASH13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaASH13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam O=flaASH13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam RGID=flaASH13F2 RGLB=flaASH13F2 RGPL=ILLUMINA RGPU=flaASH13F2 RGSM=flaASH13F2
+
+bwa mem -R "@RG\tID:flaJX13F31.112\tSM:flaJX13F31\tPL:ILLUMINA\tPU:flaJX13F31.112\tLB:flaJX13F31.112\tDS:flaJX13F31.112" -t 16 flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaJX13F31.112.mapping.temp -o flaJX13F31.112.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaJX13F31.112.markdup.temp -t 16 flaJX13F31.112.vs.flaVAN14F20.ctg.v0.unmasked.bam flaJX13F31.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaJX13F31.120\tSM:flaJX13F31\tPL:ILLUMINA\tPU:flaJX13F31.120\tLB:flaJX13F31.120\tDS:flaJX13F31.120" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaJX13F31.120.mapping.temp -o flaJX13F31.120.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaJX13F31.120.markdup.temp -t 16 flaJX13F31.120.vs.flaVAN14F20.ctg.v0.unmasked.bam flaJX13F31.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+samtools merge flaJX13F31.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam flaJX13F31.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam flaJX13F31.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index flaJX13F31.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaJX13F31.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam O=flaJX13F31.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam RGID=flaJX13F31 RGLB=flaJX13F31 RGPL=ILLUMINA RGPU=flaJX13F31 RGSM=flaJX13F31
+
+bwa mem -R "@RG\tID:flaCRAN14F7\tSM:flaCRAN14F7\tPL:ILLUMINA\tPU:flaCRAN14F7\tLB:flaCRAN14F7\tDS:flaCRAN14F7" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaCRAN14F7.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaCRAN14F7.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaCRAN14F7.mapping.temp -o flaCRAN14F7.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaCRAN14F7.markdup.temp -t 16 flaCRAN14F7.vs.flaVAN14F20.ctg.v0.unmasked.bam flaCRAN14F7.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index flaCRAN14F7.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaLB15F3.112\tSM:flaLB15F3\tPL:ILLUMINA\tPU:flaLB15F3.112\tLB:flaLB15F3.112\tDS:flaLB15F3.112" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaLB15F3.112.mapping.temp -o flaLB15F3.112.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaLB15F3.112.markdup.temp -t 16 flaLB15F3.112.vs.flaVAN14F20.ctg.v0.unmasked.bam flaLB15F3.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaLB15F3.120\tSM:flaLB15F3\tPL:ILLUMINA\tPU:flaLB15F3.120\tLB:flaLB15F3.120\tDS:flaLB15F3.120" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaLB15F3.120.mapping.temp -o flaLB15F3.120.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaLB15F3.120.markdup.temp -t 16 flaLB15F3.120.vs.flaVAN14F20.ctg.v0.unmasked.bam flaLB15F3.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+samtools merge flaLB15F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam flaLB15F3.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam flaLB15F3.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index flaLB15F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaLB15F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam O=flaLB15F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam RGID=flaLB15F3 RGLB=flaLB15F3 RGPL=ILLUMINA RGPU=flaLB15F3 RGSM=flaLB15F3
+
+bwa mem -R "@RG\tID:flaMB14F10\tSM:flaMB14F10\tPL:ILLUMINA\tPU:flaMB14F10\tLB:flaMB14F10\tDS:flaMB14F10" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaMB14F10.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaMB14F10.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaMB14F10.mapping.temp -o flaMB14F10.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaMB14F10.markdup.temp -t 16 flaMB14F10.vs.flaVAN14F20.ctg.v0.unmasked.bam flaMB14F10.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index flaMB14F10.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaTER14F5\tSM:flaTER14F5\tPL:ILLUMINA\tPU:flaTER14F5\tLB:flaTER14F5\tDS:flaTER14F5" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaTER14F5.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaTER14F5.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaTER14F5.mapping.temp -o flaTER14F5.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaTER14F5.markdup.temp -t 16 flaTER14F5.vs.flaVAN14F20.ctg.v0.unmasked.bam flaTER14F5.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index flaTER14F5.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monAF15F28.112\tSM:monAF15F28\tPL:ILLUMINA\tPU:monAF15F28.112\tLB:monAF15F28.112\tDS:monAF15F28.112" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAF15F28.112.mapping.temp -o monAF15F28.112.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAF15F28.112.markdup.temp -t 16 monAF15F28.112.vs.flaVAN14F20.ctg.v0.unmasked.bam monAF15F28.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monAF15F28.120\tSM:monAF15F28\tPL:ILLUMINA\tPU:monAF15F28.120\tLB:monAF15F28.120\tDS:monAF15F28.120" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAF15F28.120.mapping.temp -o monAF15F28.120.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAF15F28.120.markdup.temp -t 16 monAF15F28.120.vs.flaVAN14F20.ctg.v0.unmasked.bam monAF15F28.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+samtools merge monAF15F28.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam monAF15F28.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam monAF15F28.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index monAF15F28.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=monAF15F28.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam O=monAF15F28.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam RGID=monAF15F28 RGLB=monAF15F28 RGPL=ILLUMINA RGPU=monAF15F28 RGSM=monAF15F28
+
+bwa mem -R "@RG\tID:mon4Fall\tSM:mon4Fall\tPL:ILLUMINA\tPU:mon4Fall\tLB:mon4Fall\tDS:mon4Fall" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/mon4Fall.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/mon4Fall.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/mon4Fall.mapping.temp -o mon4Fall.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/mon4Fall.markdup.temp -t 16 mon4Fall.vs.flaVAN14F20.ctg.v0.unmasked.bam mon4Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index mon4Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monASH13F13.112\tSM:monASH13F13\tPL:ILLUMINA\tPU:monASH13F13.112\tLB:monASH13F13.112\tDS:monASH13F13.112" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monASH13F13.112.mapping.temp -o monASH13F13.112.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monASH13F13.112.markdup.temp -t 16 monASH13F13.112.vs.flaVAN14F20.ctg.v0.unmasked.bam monASH13F13.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monASH13F13.120\tSM:monASH13F13\tPL:ILLUMINA\tPU:monASH13F13.120\tLB:monASH13F13.120\tDS:monASH13F13.120" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monASH13F13.120.mapping.temp -o monASH13F13.120.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monASH13F13.120.markdup.temp -t 16 monASH13F13.120.vs.flaVAN14F20.ctg.v0.unmasked.bam monASH13F13.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+samtools merge monASH13F13.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam monASH13F13.112.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam monASH13F13.120.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index monASH13F13.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=monASH13F13.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam O=monASH13F13.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam RGID=monASH13F13 RGLB=monASH13F13 RGPL=ILLUMINA RGPU=monASH13F13 RGSM=monASH13F13
+
+bwa mem -R "@RG\tID:monAZA2\tSM:monAZA2\tPL:ILLUMINA\tPU:monAZA2\tLB:monAZA2\tDS:monAZA2" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAZA2.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAZA2.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAZA2.mapping.temp -o monAZA2.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAZA2.markdup.temp -t 16 monAZA2.vs.flaVAN14F20.ctg.v0.unmasked.bam monAZA2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index monAZA2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monCRAN14F16\tSM:monCRAN14F16\tPL:ILLUMINA\tPU:monCRAN14F16\tLB:monCRAN14F16\tDS:monCRAN14F16" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monCRAN14F16.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monCRAN14F16.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monCRAN14F16.mapping.temp -o monCRAN14F16.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monCRAN14F16.markdup.temp -t 16 monCRAN14F16.vs.flaVAN14F20.ctg.v0.unmasked.bam monCRAN14F16.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index monCRAN14F16.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monFA13F2\tSM:monFA13F2\tPL:ILLUMINA\tPU:monFA13F2\tLB:monFA13F2\tDS:monFA13F2" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monFA13F2.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monFA13F2.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monFA13F2.mapping.temp -o monFA13F2.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monFA13F2.markdup.temp -t 16 monFA13F2.vs.flaVAN14F20.ctg.v0.unmasked.bam monFA13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index monFA13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monHO13F3\tSM:monHO13F3\tPL:ILLUMINA\tPU:monHO13F3\tLB:monHO13F3\tDS:monHO13F3" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monHO13F3.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monHO13F3.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monHO13F3.mapping.temp -o monHO13F3.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monHO13F3.markdup.temp -t 16 monHO13F3.vs.flaVAN14F20.ctg.v0.unmasked.bam monHO13F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index monHO13F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monMB14F1\tSM:monMB14F1\tPL:ILLUMINA\tPU:monMB14F1\tLB:monMB14F1\tDS:monMB14F1" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monMB14F1.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monMB14F1.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monMB14F1.mapping.temp -o monMB14F1.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monMB14F1.markdup.temp -t 16 monMB14F1.vs.flaVAN14F20.ctg.v0.unmasked.bam monMB14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index monMB14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monTER14F11\tSM:monTER14F11\tPL:ILLUMINA\tPU:monTER14F11\tLB:monTER14F11\tDS:monTER14F11" -t 16  flaVAN14F20.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monTER14F11.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monTER14F11.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monTER14F11.mapping.temp -o monTER14F11.vs.flaVAN14F20.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monTER14F11.markdup.temp -t 16 monTER14F11.vs.flaVAN14F20.ctg.v0.unmasked.bam monTER14F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam && samtools index monTER14F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+
+
+
+
+## Map short-reads against monSE13F37 assembly
+bwa mem -R "@RG\tID:monJX13F48.112\tSM:monJX13F48\tPL:ILLUMINA\tPU:monJX13F48.112\tLB:monJX13F48.112\tDS:monJX13F48.112" -t 16 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa 0_reads/monJX13F48.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-003_NX-P5-017_1.fastq.gz 0_reads/monJX13F48.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-003_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monJX13F48.112.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monJX13F48.112.vs.monSE13F37.ctg.v0.unmasked.bam /scratch/npoikela/monJX13F48.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monJX13F48.120\tSM:monJX13F48\tPL:ILLUMINA\tPU:monJX13F48.120\tLB:monJX13F48.120\tDS:monJX13F48.120" -t 16 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa 0_reads/monJX13F48.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-003_NX-P5-017_1.fastq.gz 0_reads/monJX13F48.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-003_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monJX13F48.120.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monJX13F48.120.vs.monSE13F37.ctg.v0.unmasked.bam /scratch/npoikela/monJX13F48.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/monJX13F48.vs.monSE13F37.ctg.v0.unmasked.MD.bam /scratch/npoikela/monJX13F48.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam /scratch/npoikela/monJX13F48.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/monJX13F48.vs.monSE13F37.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monJX13F48.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaVAN14F20.112\tSM:flaVAN14F20\tPL:ILLUMINA\tPU:flaVAN14F20.112\tLB:flaVAN14F20.112\tDS:flaVAN14F20.112" -t 16 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa 0_reads/VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_1.fastq.gz 0_reads/VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaVAN14F20.112.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaVAN14F20.112.vs.monSE13F37.ctg.v0.unmasked.bam /scratch/npoikela/flaVAN14F20.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaVAN14F20.120\tSM:flaVAN14F20\tPL:ILLUMINA\tPU:flaVAN14F20.120\tLB:flaVAN14F20.120\tDS:flaVAN14F20.120" -t 16 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa 0_reads/VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_1.fastq.gz 0_reads/VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaVAN14F20.120.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaVAN14F20.120.vs.monSE13F37.ctg.v0.unmasked.bam /scratch/npoikela/flaVAN14F20.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/flaVAN14F20.vs.monSE13F37.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaVAN14F20.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaVAN14F20.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/flaVAN14F20.vs.monSE13F37.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/flaVAN14F20.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaMT13F11.112\tSM:flaMT13F11\tPL:ILLUMINA\tPU:flaMT13F11.112\tLB:flaMT13F11.112\tDS:flaMT13F11.112" -t 16 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa 0_reads/MT13F11_170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-002_1.fastq.gz 0_reads/MT13F11_170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-002_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaMT13F11.112.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaMT13F11.112.vs.monSE13F37.ctg.v0.unmasked.bam /scratch/npoikela/flaMT13F11.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaMT13F11.120\tSM:flaMT13F11\tPL:ILLUMINA\tPU:flaMT13F11.120\tLB:flaMT13F11.120\tDS:flaMT13F11.120" -t 16 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa 0_reads/MT13F11_170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-002_1.fastq.gz 0_reads/MT13F11_170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-002_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaMT13F11.120.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaMT13F11.120.vs.monSE13F37.ctg.v0.unmasked.bam /scratch/npoikela/flaMT13F11.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/flaMT13F11.vs.monSE13F37.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaMT13F11.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaMT13F11.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/flaMT13F11.vs.monSE13F37.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/flaMT13F11.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monSE13F37\tSM:monSE13F37\tPL:ILLUMINA\tPU:monSE13F37\tLB:monSE13F37\tDS:monSE13F37" -t 40 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa 0_reads/monSE13F37_illumina_R1.fastq.gz 0_reads/monSE13F37_illumina_R2.fastq.gz | samtools sort -@40 -o /scratch/npoikela/monSE13F37.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup -t 40 /scratch/npoikela/monSE13F37.vs.monSE13F37.ctg.v0.unmasked.bam /scratch/npoikela/monSE13F37.vs.monSE13F37.ctg.v0.unmasked.MD.bam --tmpdir=markdup --hash-table-size=400000 --overflow-list-size=400000 && rsync /scratch/npoikela/monSE13F37.vs.monSE13F37.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monSE13F37.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monVAN14F1.112\tSM:monVAN14F1\tPL:ILLUMINA\tPU:monVAN14F1.112\tLB:monVAN14F1.112\tDS:monVAN14F1.112" -t 16 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa 0_reads/monVAN14F1.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-002_NX-P5-017_1.fastq.gz 0_reads/monVAN14F1.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-002_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monVAN14F1.112.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monVAN14F1.112.vs.monSE13F37.ctg.v0.unmasked.bam /scratch/npoikela/monVAN14F1.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monVAN14F1.120\tSM:monVAN14F1\tPL:ILLUMINA\tPU:monVAN14F1.120\tLB:monVAN14F1.120\tDS:monVAN14F1.120" -t 16 5_freeze_v0/monSE13F37.ctg.v0.unmasked.fa 0_reads/monVAN14F1.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-002_NX-P5-017_1.fastq.gz 0_reads/monVAN14F1.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-002_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monVAN14F1.120.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monVAN14F1.120.vs.monSE13F37.ctg.v0.unmasked.bam /scratch/npoikela/monVAN14F1.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/monVAN14F1.vs.monSE13F37.ctg.v0.unmasked.MD.bam /scratch/npoikela/monVAN14F1.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam /scratch/npoikela/monVAN14F1.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/monVAN14F1.vs.monSE13F37.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monVAN14F1.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:fla3Fall\tSM:fla3Fall\tPL:ILLUMINA\tPU:fla3Fall\tLB:fla3Fall\tDS:fla3Fall" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/fla3Fall.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/fla3Fall.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/fla3Fall.mapping.temp -o fla3Fall.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/fla3Fall.markdup.temp -t 16 fla3Fall.vs.monSE13F37.ctg.v0.unmasked.bam fla3Fall.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index fla3Fall.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaASH13F2.112\tSM:flaASH13F2\tPL:ILLUMINA\tPU:flaASH13F2.112\tLB:flaASH13F2.112\tDS:flaASH13F2.112" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaASH13F2.112.mapping.temp -o flaASH13F2.112.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaASH13F2.112.markdup.temp -t 16 flaASH13F2.112.vs.monSE13F37.ctg.v0.unmasked.bam flaASH13F2.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaASH13F2.120\tSM:flaASH13F2\tPL:ILLUMINA\tPU:flaASH13F2.120\tLB:flaASH13F2.120\tDS:flaASH13F2.120" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaASH13F2.120.mapping.temp -o flaASH13F2.120.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaASH13F2.120.markdup.temp -t 16 flaASH13F2.120.vs.monSE13F37.ctg.v0.unmasked.bam flaASH13F2.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+samtools merge flaASH13F2.vs.monSE13F37.ctg.v0.unmasked.MD.bam flaASH13F2.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam flaASH13F2.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index flaASH13F2.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaASH13F2.vs.monSE13F37.ctg.v0.unmasked.MD.bam O=flaASH13F2.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam RGID=flaASH13F2 RGLB=flaASH13F2 RGPL=ILLUMINA RGPU=flaASH13F2 RGSM=flaASH13F2
+
+bwa mem -R "@RG\tID:flaJX13F31.112\tSM:flaJX13F31\tPL:ILLUMINA\tPU:flaJX13F31.112\tLB:flaJX13F31.112\tDS:flaJX13F31.112" -t 16 monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaJX13F31.112.mapping.temp -o flaJX13F31.112.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaJX13F31.112.markdup.temp -t 16 flaJX13F31.112.vs.monSE13F37.ctg.v0.unmasked.bam flaJX13F31.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaJX13F31.120\tSM:flaJX13F31\tPL:ILLUMINA\tPU:flaJX13F31.120\tLB:flaJX13F31.120\tDS:flaJX13F31.120" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaJX13F31.120.mapping.temp -o flaJX13F31.120.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaJX13F31.120.markdup.temp -t 16 flaJX13F31.120.vs.monSE13F37.ctg.v0.unmasked.bam flaJX13F31.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+samtools merge flaJX13F31.vs.monSE13F37.ctg.v0.unmasked.MD.bam flaJX13F31.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam flaJX13F31.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index flaJX13F31.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaJX13F31.vs.monSE13F37.ctg.v0.unmasked.MD.bam O=flaJX13F31.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam RGID=flaJX13F31 RGLB=flaJX13F31 RGPL=ILLUMINA RGPU=flaJX13F31 RGSM=flaJX13F31
+
+bwa mem -R "@RG\tID:flaCRAN14F7\tSM:flaCRAN14F7\tPL:ILLUMINA\tPU:flaCRAN14F7\tLB:flaCRAN14F7\tDS:flaCRAN14F7" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaCRAN14F7.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaCRAN14F7.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaCRAN14F7.mapping.temp -o flaCRAN14F7.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaCRAN14F7.markdup.temp -t 16 flaCRAN14F7.vs.monSE13F37.ctg.v0.unmasked.bam flaCRAN14F7.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index flaCRAN14F7.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaLB15F3.112\tSM:flaLB15F3\tPL:ILLUMINA\tPU:flaLB15F3.112\tLB:flaLB15F3.112\tDS:flaLB15F3.112" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaLB15F3.112.mapping.temp -o flaLB15F3.112.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaLB15F3.112.markdup.temp -t 16 flaLB15F3.112.vs.monSE13F37.ctg.v0.unmasked.bam flaLB15F3.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaLB15F3.120\tSM:flaLB15F3\tPL:ILLUMINA\tPU:flaLB15F3.120\tLB:flaLB15F3.120\tDS:flaLB15F3.120" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaLB15F3.120.mapping.temp -o flaLB15F3.120.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaLB15F3.120.markdup.temp -t 16 flaLB15F3.120.vs.monSE13F37.ctg.v0.unmasked.bam flaLB15F3.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+samtools merge flaLB15F3.vs.monSE13F37.ctg.v0.unmasked.MD.bam flaLB15F3.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam flaLB15F3.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index flaLB15F3.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaLB15F3.vs.monSE13F37.ctg.v0.unmasked.MD.bam O=flaLB15F3.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam RGID=flaLB15F3 RGLB=flaLB15F3 RGPL=ILLUMINA RGPU=flaLB15F3 RGSM=flaLB15F3
+
+bwa mem -R "@RG\tID:flaMB14F10\tSM:flaMB14F10\tPL:ILLUMINA\tPU:flaMB14F10\tLB:flaMB14F10\tDS:flaMB14F10" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaMB14F10.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaMB14F10.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaMB14F10.mapping.temp -o flaMB14F10.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaMB14F10.markdup.temp -t 16 flaMB14F10.vs.monSE13F37.ctg.v0.unmasked.bam flaMB14F10.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index flaMB14F10.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaTER14F5\tSM:flaTER14F5\tPL:ILLUMINA\tPU:flaTER14F5\tLB:flaTER14F5\tDS:flaTER14F5" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaTER14F5.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaTER14F5.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaTER14F5.mapping.temp -o flaTER14F5.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaTER14F5.markdup.temp -t 16 flaTER14F5.vs.monSE13F37.ctg.v0.unmasked.bam flaTER14F5.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index flaTER14F5.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monAF15F28.112\tSM:monAF15F28\tPL:ILLUMINA\tPU:monAF15F28.112\tLB:monAF15F28.112\tDS:monAF15F28.112" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAF15F28.112.mapping.temp -o monAF15F28.112.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAF15F28.112.markdup.temp -t 16 monAF15F28.112.vs.monSE13F37.ctg.v0.unmasked.bam monAF15F28.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monAF15F28.120\tSM:monAF15F28\tPL:ILLUMINA\tPU:monAF15F28.120\tLB:monAF15F28.120\tDS:monAF15F28.120" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAF15F28.120.mapping.temp -o monAF15F28.120.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAF15F28.120.markdup.temp -t 16 monAF15F28.120.vs.monSE13F37.ctg.v0.unmasked.bam monAF15F28.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+samtools merge monAF15F28.vs.monSE13F37.ctg.v0.unmasked.MD.bam monAF15F28.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam monAF15F28.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index monAF15F28.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=monAF15F28.vs.monSE13F37.ctg.v0.unmasked.MD.bam O=monAF15F28.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam RGID=monAF15F28 RGLB=monAF15F28 RGPL=ILLUMINA RGPU=monAF15F28 RGSM=monAF15F28
+
+bwa mem -R "@RG\tID:mon4Fall\tSM:mon4Fall\tPL:ILLUMINA\tPU:mon4Fall\tLB:mon4Fall\tDS:mon4Fall" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/mon4Fall.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/mon4Fall.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/mon4Fall.mapping.temp -o mon4Fall.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/mon4Fall.markdup.temp -t 16 mon4Fall.vs.monSE13F37.ctg.v0.unmasked.bam mon4Fall.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index mon4Fall.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monASH13F13.112\tSM:monASH13F13\tPL:ILLUMINA\tPU:monASH13F13.112\tLB:monASH13F13.112\tDS:monASH13F13.112" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monASH13F13.112.mapping.temp -o monASH13F13.112.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monASH13F13.112.markdup.temp -t 16 monASH13F13.112.vs.monSE13F37.ctg.v0.unmasked.bam monASH13F13.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monASH13F13.120\tSM:monASH13F13\tPL:ILLUMINA\tPU:monASH13F13.120\tLB:monASH13F13.120\tDS:monASH13F13.120" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monASH13F13.120.mapping.temp -o monASH13F13.120.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monASH13F13.120.markdup.temp -t 16 monASH13F13.120.vs.monSE13F37.ctg.v0.unmasked.bam monASH13F13.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+samtools merge monASH13F13.vs.monSE13F37.ctg.v0.unmasked.MD.bam monASH13F13.112.vs.monSE13F37.ctg.v0.unmasked.MD.bam monASH13F13.120.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index monASH13F13.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=monASH13F13.vs.monSE13F37.ctg.v0.unmasked.MD.bam O=monASH13F13.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam RGID=monASH13F13 RGLB=monASH13F13 RGPL=ILLUMINA RGPU=monASH13F13 RGSM=monASH13F13
+
+bwa mem -R "@RG\tID:monAZA2\tSM:monAZA2\tPL:ILLUMINA\tPU:monAZA2\tLB:monAZA2\tDS:monAZA2" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAZA2.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAZA2.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAZA2.mapping.temp -o monAZA2.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAZA2.markdup.temp -t 16 monAZA2.vs.monSE13F37.ctg.v0.unmasked.bam monAZA2.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index monAZA2.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monCRAN14F16\tSM:monCRAN14F16\tPL:ILLUMINA\tPU:monCRAN14F16\tLB:monCRAN14F16\tDS:monCRAN14F16" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monCRAN14F16.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monCRAN14F16.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monCRAN14F16.mapping.temp -o monCRAN14F16.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monCRAN14F16.markdup.temp -t 16 monCRAN14F16.vs.monSE13F37.ctg.v0.unmasked.bam monCRAN14F16.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index monCRAN14F16.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monFA13F2\tSM:monFA13F2\tPL:ILLUMINA\tPU:monFA13F2\tLB:monFA13F2\tDS:monFA13F2" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monFA13F2.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monFA13F2.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monFA13F2.mapping.temp -o monFA13F2.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monFA13F2.markdup.temp -t 16 monFA13F2.vs.monSE13F37.ctg.v0.unmasked.bam monFA13F2.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index monFA13F2.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monHO13F3\tSM:monHO13F3\tPL:ILLUMINA\tPU:monHO13F3\tLB:monHO13F3\tDS:monHO13F3" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monHO13F3.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monHO13F3.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monHO13F3.mapping.temp -o monHO13F3.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monHO13F3.markdup.temp -t 16 monHO13F3.vs.monSE13F37.ctg.v0.unmasked.bam monHO13F3.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index monHO13F3.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monMB14F1\tSM:monMB14F1\tPL:ILLUMINA\tPU:monMB14F1\tLB:monMB14F1\tDS:monMB14F1" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monMB14F1.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monMB14F1.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monMB14F1.mapping.temp -o monMB14F1.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monMB14F1.markdup.temp -t 16 monMB14F1.vs.monSE13F37.ctg.v0.unmasked.bam monMB14F1.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index monMB14F1.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monTER14F11\tSM:monTER14F11\tPL:ILLUMINA\tPU:monTER14F11\tLB:monTER14F11\tDS:monTER14F11" -t 16  monSE13F37.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monTER14F11.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monTER14F11.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monTER14F11.mapping.temp -o monTER14F11.vs.monSE13F37.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monTER14F11.markdup.temp -t 16 monTER14F11.vs.monSE13F37.ctg.v0.unmasked.bam monTER14F11.vs.monSE13F37.ctg.v0.unmasked.MD.bam && samtools index monTER14F11.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+
+
+
+
+## Map short-reads against monJX13F48 assembly
+bwa mem -R "@RG\tID:monJX13F48.112\tSM:monJX13F48\tPL:ILLUMINA\tPU:monJX13F48.112\tLB:monJX13F48.112\tDS:monJX13F48.112" -t 16 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa 0_reads/monJX13F48.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-003_NX-P5-017_1.fastq.gz 0_reads/monJX13F48.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-003_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monJX13F48.112.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monJX13F48.112.vs.monJX13F48.ctg.v0.unmasked.bam /scratch/npoikela/monJX13F48.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monJX13F48.120\tSM:monJX13F48\tPL:ILLUMINA\tPU:monJX13F48.120\tLB:monJX13F48.120\tDS:monJX13F48.120" -t 16 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa 0_reads/monJX13F48.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-003_NX-P5-017_1.fastq.gz 0_reads/monJX13F48.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-003_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monJX13F48.120.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monJX13F48.120.vs.monJX13F48.ctg.v0.unmasked.bam /scratch/npoikela/monJX13F48.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/monJX13F48.vs.monJX13F48.ctg.v0.unmasked.MD.bam /scratch/npoikela/monJX13F48.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam /scratch/npoikela/monJX13F48.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/monJX13F48.vs.monJX13F48.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monJX13F48.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaVAN14F20.112\tSM:flaVAN14F20\tPL:ILLUMINA\tPU:flaVAN14F20.112\tLB:flaVAN14F20.112\tDS:flaVAN14F20.112" -t 16 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa 0_reads/VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_1.fastq.gz 0_reads/VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaVAN14F20.112.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaVAN14F20.112.vs.monJX13F48.ctg.v0.unmasked.bam /scratch/npoikela/flaVAN14F20.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaVAN14F20.120\tSM:flaVAN14F20\tPL:ILLUMINA\tPU:flaVAN14F20.120\tLB:flaVAN14F20.120\tDS:flaVAN14F20.120" -t 16 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa 0_reads/VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_1.fastq.gz 0_reads/VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaVAN14F20.120.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaVAN14F20.120.vs.monJX13F48.ctg.v0.unmasked.bam /scratch/npoikela/flaVAN14F20.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/flaVAN14F20.vs.monJX13F48.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaVAN14F20.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaVAN14F20.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/flaVAN14F20.vs.monJX13F48.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/flaVAN14F20.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaMT13F11.112\tSM:flaMT13F11\tPL:ILLUMINA\tPU:flaMT13F11.112\tLB:flaMT13F11.112\tDS:flaMT13F11.112" -t 16 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa 0_reads/MT13F11_170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-002_1.fastq.gz 0_reads/MT13F11_170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-002_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaMT13F11.112.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaMT13F11.112.vs.monJX13F48.ctg.v0.unmasked.bam /scratch/npoikela/flaMT13F11.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaMT13F11.120\tSM:flaMT13F11\tPL:ILLUMINA\tPU:flaMT13F11.120\tLB:flaMT13F11.120\tDS:flaMT13F11.120" -t 16 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa 0_reads/MT13F11_170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-002_1.fastq.gz 0_reads/MT13F11_170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-002_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/flaMT13F11.120.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/flaMT13F11.120.vs.monJX13F48.ctg.v0.unmasked.bam /scratch/npoikela/flaMT13F11.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/flaMT13F11.vs.monJX13F48.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaMT13F11.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam /scratch/npoikela/flaMT13F11.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/flaMT13F11.vs.monJX13F48.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/flaMT13F11.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monSE13F37\tSM:monSE13F37\tPL:ILLUMINA\tPU:monSE13F37\tLB:monSE13F37\tDS:monSE13F37" -t 40 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa 0_reads/monSE13F37_illumina_R1.fastq.gz 0_reads/monSE13F37_illumina_R2.fastq.gz | samtools sort -@40 -o /scratch/npoikela/monSE13F37.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup -t 40 /scratch/npoikela/monSE13F37.vs.monJX13F48.ctg.v0.unmasked.bam /scratch/npoikela/monSE13F37.vs.monJX13F48.ctg.v0.unmasked.MD.bam --tmpdir=markdup --hash-table-size=400000 --overflow-list-size=400000 && rsync /scratch/npoikela/monSE13F37.vs.monJX13F48.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monSE13F37.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monVAN14F1.112\tSM:monVAN14F1\tPL:ILLUMINA\tPU:monVAN14F1.112\tLB:monVAN14F1.112\tDS:monVAN14F1.112" -t 16 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa 0_reads/monVAN14F1.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-002_NX-P5-017_1.fastq.gz 0_reads/monVAN14F1.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-002_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monVAN14F1.112.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monVAN14F1.112.vs.monJX13F48.ctg.v0.unmasked.bam /scratch/npoikela/monVAN14F1.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monVAN14F1.120\tSM:monVAN14F1\tPL:ILLUMINA\tPU:monVAN14F1.120\tLB:monVAN14F1.120\tDS:monVAN14F1.120" -t 16 5_freeze_v0/monJX13F48.ctg.v0.unmasked.fa 0_reads/monVAN14F1.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-002_NX-P5-017_1.fastq.gz 0_reads/monVAN14F1.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-002_NX-P5-017_2.fastq.gz | samtools sort -@16 -o /scratch/npoikela/monVAN14F1.120.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup -t 16 /scratch/npoikela/monVAN14F1.120.vs.monJX13F48.ctg.v0.unmasked.bam /scratch/npoikela/monVAN14F1.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+samtools merge /scratch/npoikela/monVAN14F1.vs.monJX13F48.ctg.v0.unmasked.MD.bam /scratch/npoikela/monVAN14F1.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam /scratch/npoikela/monVAN14F1.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam && rsync /scratch/npoikela/monVAN14F1.vs.monJX13F48.ctg.v0.unmasked.MD.bam /data/lohse/drosophila/analyses/13_inversion_check/ && samtools index /data/lohse/drosophila/analyses/13_inversion_check/monVAN14F1.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:fla3Fall\tSM:fla3Fall\tPL:ILLUMINA\tPU:fla3Fall\tLB:fla3Fall\tDS:fla3Fall" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/fla3Fall.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/fla3Fall.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/fla3Fall.mapping.temp -o fla3Fall.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/fla3Fall.markdup.temp -t 16 fla3Fall.vs.monJX13F48.ctg.v0.unmasked.bam fla3Fall.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index fla3Fall.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaASH13F2.112\tSM:flaASH13F2\tPL:ILLUMINA\tPU:flaASH13F2.112\tLB:flaASH13F2.112\tDS:flaASH13F2.112" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaASH13F2.112.mapping.temp -o flaASH13F2.112.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaASH13F2.112.markdup.temp -t 16 flaASH13F2.112.vs.monJX13F48.ctg.v0.unmasked.bam flaASH13F2.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaASH13F2.120\tSM:flaASH13F2\tPL:ILLUMINA\tPU:flaASH13F2.120\tLB:flaASH13F2.120\tDS:flaASH13F2.120" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaASH13F2.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaASH13F2.120.mapping.temp -o flaASH13F2.120.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaASH13F2.120.markdup.temp -t 16 flaASH13F2.120.vs.monJX13F48.ctg.v0.unmasked.bam flaASH13F2.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+samtools merge flaASH13F2.vs.monJX13F48.ctg.v0.unmasked.MD.bam flaASH13F2.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam flaASH13F2.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index flaASH13F2.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaASH13F2.vs.monJX13F48.ctg.v0.unmasked.MD.bam O=flaASH13F2.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam RGID=flaASH13F2 RGLB=flaASH13F2 RGPL=ILLUMINA RGPU=flaASH13F2 RGSM=flaASH13F2
+
+bwa mem -R "@RG\tID:flaJX13F31.112\tSM:flaJX13F31\tPL:ILLUMINA\tPU:flaJX13F31.112\tLB:flaJX13F31.112\tDS:flaJX13F31.112" -t 16 monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaJX13F31.112.mapping.temp -o flaJX13F31.112.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaJX13F31.112.markdup.temp -t 16 flaJX13F31.112.vs.monJX13F48.ctg.v0.unmasked.bam flaJX13F31.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaJX13F31.120\tSM:flaJX13F31\tPL:ILLUMINA\tPU:flaJX13F31.120\tLB:flaJX13F31.120\tDS:flaJX13F31.120" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaJX13F31.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaJX13F31.120.mapping.temp -o flaJX13F31.120.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaJX13F31.120.markdup.temp -t 16 flaJX13F31.120.vs.monJX13F48.ctg.v0.unmasked.bam flaJX13F31.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+samtools merge flaJX13F31.vs.monJX13F48.ctg.v0.unmasked.MD.bam flaJX13F31.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam flaJX13F31.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index flaJX13F31.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaJX13F31.vs.monJX13F48.ctg.v0.unmasked.MD.bam O=flaJX13F31.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam RGID=flaJX13F31 RGLB=flaJX13F31 RGPL=ILLUMINA RGPU=flaJX13F31 RGSM=flaJX13F31
+
+bwa mem -R "@RG\tID:flaCRAN14F7\tSM:flaCRAN14F7\tPL:ILLUMINA\tPU:flaCRAN14F7\tLB:flaCRAN14F7\tDS:flaCRAN14F7" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaCRAN14F7.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaCRAN14F7.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaCRAN14F7.mapping.temp -o flaCRAN14F7.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaCRAN14F7.markdup.temp -t 16 flaCRAN14F7.vs.monJX13F48.ctg.v0.unmasked.bam flaCRAN14F7.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index flaCRAN14F7.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaLB15F3.112\tSM:flaLB15F3\tPL:ILLUMINA\tPU:flaLB15F3.112\tLB:flaLB15F3.112\tDS:flaLB15F3.112" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaLB15F3.112.mapping.temp -o flaLB15F3.112.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaLB15F3.112.markdup.temp -t 16 flaLB15F3.112.vs.monJX13F48.ctg.v0.unmasked.bam flaLB15F3.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:flaLB15F3.120\tSM:flaLB15F3\tPL:ILLUMINA\tPU:flaLB15F3.120\tLB:flaLB15F3.120\tDS:flaLB15F3.120" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaLB15F3.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaLB15F3.120.mapping.temp -o flaLB15F3.120.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaLB15F3.120.markdup.temp -t 16 flaLB15F3.120.vs.monJX13F48.ctg.v0.unmasked.bam flaLB15F3.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+samtools merge flaLB15F3.vs.monJX13F48.ctg.v0.unmasked.MD.bam flaLB15F3.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam flaLB15F3.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index flaLB15F3.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=flaLB15F3.vs.monJX13F48.ctg.v0.unmasked.MD.bam O=flaLB15F3.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam RGID=flaLB15F3 RGLB=flaLB15F3 RGPL=ILLUMINA RGPU=flaLB15F3 RGSM=flaLB15F3
+
+bwa mem -R "@RG\tID:flaMB14F10\tSM:flaMB14F10\tPL:ILLUMINA\tPU:flaMB14F10\tLB:flaMB14F10\tDS:flaMB14F10" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaMB14F10.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaMB14F10.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaMB14F10.mapping.temp -o flaMB14F10.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaMB14F10.markdup.temp -t 16 flaMB14F10.vs.monJX13F48.ctg.v0.unmasked.bam flaMB14F10.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index flaMB14F10.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:flaTER14F5\tSM:flaTER14F5\tPL:ILLUMINA\tPU:flaTER14F5\tLB:flaTER14F5\tDS:flaTER14F5" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaTER14F5.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/flaTER14F5.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/flaTER14F5.mapping.temp -o flaTER14F5.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/flaTER14F5.markdup.temp -t 16 flaTER14F5.vs.monJX13F48.ctg.v0.unmasked.bam flaTER14F5.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index flaTER14F5.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monAF15F28.112\tSM:monAF15F28\tPL:ILLUMINA\tPU:monAF15F28.112\tLB:monAF15F28.112\tDS:monAF15F28.112" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAF15F28.112.mapping.temp -o monAF15F28.112.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAF15F28.112.markdup.temp -t 16 monAF15F28.112.vs.monJX13F48.ctg.v0.unmasked.bam monAF15F28.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monAF15F28.120\tSM:monAF15F28\tPL:ILLUMINA\tPU:monAF15F28.120\tLB:monAF15F28.120\tDS:monAF15F28.120" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAF15F28.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAF15F28.120.mapping.temp -o monAF15F28.120.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAF15F28.120.markdup.temp -t 16 monAF15F28.120.vs.monJX13F48.ctg.v0.unmasked.bam monAF15F28.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+samtools merge monAF15F28.vs.monJX13F48.ctg.v0.unmasked.MD.bam monAF15F28.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam monAF15F28.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index monAF15F28.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=monAF15F28.vs.monJX13F48.ctg.v0.unmasked.MD.bam O=monAF15F28.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam RGID=monAF15F28 RGLB=monAF15F28 RGPL=ILLUMINA RGPU=monAF15F28 RGSM=monAF15F28
+
+bwa mem -R "@RG\tID:mon4Fall\tSM:mon4Fall\tPL:ILLUMINA\tPU:mon4Fall\tLB:mon4Fall\tDS:mon4Fall" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/mon4Fall.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/mon4Fall.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/mon4Fall.mapping.temp -o mon4Fall.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/mon4Fall.markdup.temp -t 16 mon4Fall.vs.monJX13F48.ctg.v0.unmasked.bam mon4Fall.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index mon4Fall.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monASH13F13.112\tSM:monASH13F13\tPL:ILLUMINA\tPU:monASH13F13.112\tLB:monASH13F13.112\tDS:monASH13F13.112" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.112.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.112.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monASH13F13.112.mapping.temp -o monASH13F13.112.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monASH13F13.112.markdup.temp -t 16 monASH13F13.112.vs.monJX13F48.ctg.v0.unmasked.bam monASH13F13.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bwa mem -R "@RG\tID:monASH13F13.120\tSM:monASH13F13\tPL:ILLUMINA\tPU:monASH13F13.120\tLB:monASH13F13.120\tDS:monASH13F13.120" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.120.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monASH13F13.120.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monASH13F13.120.mapping.temp -o monASH13F13.120.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monASH13F13.120.markdup.temp -t 16 monASH13F13.120.vs.monJX13F48.ctg.v0.unmasked.bam monASH13F13.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+samtools merge monASH13F13.vs.monJX13F48.ctg.v0.unmasked.MD.bam monASH13F13.112.vs.monJX13F48.ctg.v0.unmasked.MD.bam monASH13F13.120.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index monASH13F13.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+picard AddOrReplaceReadGroups I=monASH13F13.vs.monJX13F48.ctg.v0.unmasked.MD.bam O=monASH13F13.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam RGID=monASH13F13 RGLB=monASH13F13 RGPL=ILLUMINA RGPU=monASH13F13 RGSM=monASH13F13
+
+bwa mem -R "@RG\tID:monAZA2\tSM:monAZA2\tPL:ILLUMINA\tPU:monAZA2\tLB:monAZA2\tDS:monAZA2" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAZA2.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monAZA2.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monAZA2.mapping.temp -o monAZA2.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monAZA2.markdup.temp -t 16 monAZA2.vs.monJX13F48.ctg.v0.unmasked.bam monAZA2.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index monAZA2.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monCRAN14F16\tSM:monCRAN14F16\tPL:ILLUMINA\tPU:monCRAN14F16\tLB:monCRAN14F16\tDS:monCRAN14F16" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monCRAN14F16.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monCRAN14F16.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monCRAN14F16.mapping.temp -o monCRAN14F16.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monCRAN14F16.markdup.temp -t 16 monCRAN14F16.vs.monJX13F48.ctg.v0.unmasked.bam monCRAN14F16.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index monCRAN14F16.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monFA13F2\tSM:monFA13F2\tPL:ILLUMINA\tPU:monFA13F2\tLB:monFA13F2\tDS:monFA13F2" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monFA13F2.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monFA13F2.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monFA13F2.mapping.temp -o monFA13F2.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monFA13F2.markdup.temp -t 16 monFA13F2.vs.monJX13F48.ctg.v0.unmasked.bam monFA13F2.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index monFA13F2.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monHO13F3\tSM:monHO13F3\tPL:ILLUMINA\tPU:monHO13F3\tLB:monHO13F3\tDS:monHO13F3" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monHO13F3.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monHO13F3.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monHO13F3.mapping.temp -o monHO13F3.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monHO13F3.markdup.temp -t 16 monHO13F3.vs.monJX13F48.ctg.v0.unmasked.bam monHO13F3.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index monHO13F3.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monMB14F1\tSM:monMB14F1\tPL:ILLUMINA\tPU:monMB14F1\tLB:monMB14F1\tDS:monMB14F1" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monMB14F1.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monMB14F1.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monMB14F1.mapping.temp -o monMB14F1.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monMB14F1.markdup.temp -t 16 monMB14F1.vs.monJX13F48.ctg.v0.unmasked.bam monMB14F1.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index monMB14F1.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+bwa mem -R "@RG\tID:monTER14F11\tSM:monTER14F11\tPL:ILLUMINA\tPU:monTER14F11\tLB:monTER14F11\tDS:monTER14F11" -t 16  monJX13F48.ctg.v0.unmasked.fa /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monTER14F11.1.trim.fq.gz /ceph/users/npoikela/analyses/0_reads/trimmed_wildcaught/monTER14F11.2.trim.fq.gz | samtools sort -@16 -T /scratch/npoikela/monTER14F11.mapping.temp -o monTER14F11.vs.monJX13F48.ctg.v0.unmasked.bam
+sambamba markdup --tmpdir=/scratch/npoikela/monTER14F11.markdup.temp -t 16 monTER14F11.vs.monJX13F48.ctg.v0.unmasked.bam monTER14F11.vs.monJX13F48.ctg.v0.unmasked.MD.bam && samtools index monTER14F11.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+
+
+## Delly
+delly call -o /scratch/npoikela/delly.flaTER14F5.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa flaTER14F5.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaTER14F5.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.flaTER14F5.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.fla3Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa fla3Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.fla3Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.fla3Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaCRAN14F7.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa flaCRAN14F7.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaCRAN14F7.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.flaCRAN14F7.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monASH13F13.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monASH13F13.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monASH13F13.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monASH13F13.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaASH13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa flaASH13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaASH13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.flaASH13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monMB14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monMB14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monMB14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monMB14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaVAN14F20.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa flaVAN14F20.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaVAN14F20.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.flaVAN14F20.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monAZA2.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monAZA2.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monAZA2.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monAZA2.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaLB15F3.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa flaLB15F3.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaLB15F3.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.flaLB15F3.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monCRAN14F16.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monCRAN14F16.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monCRAN14F16.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monCRAN14F16.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monTER14F11.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monTER14F11.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monTER14F11.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monTER14F11.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monFA13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monFA13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monFA13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monFA13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monAF15F28.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monAF15F28.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monAF15F28.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monAF15F28.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monHO13F3.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monHO13F3.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monHO13F3.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monHO13F3.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaMT13F11.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa flaMT13F11.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaMT13F11.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.flaMT13F11.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monVAN14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa monVAN14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monVAN14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.monVAN14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaJX13F31.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa flaJX13F31.vs.flaMT13F11.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaJX13F31.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.flaJX13F31.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.mon4Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa mon4Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.mon4Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.mon4Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaMB14F10.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf -g flaMT13F11.ctg.v0.unmasked.fa flaMB14F10.vs.flaMT13F11.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaMB14F10.vs.flaMT13F11.ctg.v0.unmasked.MD.bcf > delly.flaMB14F10.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf
+
+delly call -o /scratch/npoikela/delly.flaTER14F5.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa flaTER14F5.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaTER14F5.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.flaTER14F5.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.fla3Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa fla3Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.fla3Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.fla3Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaCRAN14F7.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa flaCRAN14F7.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaCRAN14F7.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.flaCRAN14F7.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monASH13F13.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monASH13F13.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monASH13F13.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monASH13F13.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaASH13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa flaASH13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaASH13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.flaASH13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monMB14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monMB14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monMB14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monMB14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaVAN14F20.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa flaVAN14F20.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaVAN14F20.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.flaVAN14F20.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monAZA2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monAZA2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monAZA2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monAZA2.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaLB15F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa flaLB15F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaLB15F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.flaLB15F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monCRAN14F16.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monCRAN14F16.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monCRAN14F16.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monCRAN14F16.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monTER14F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monTER14F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monTER14F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monTER14F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monFA13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monFA13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monFA13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monFA13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monAF15F28.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monAF15F28.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monAF15F28.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monAF15F28.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monHO13F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monHO13F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monHO13F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monHO13F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaMT13F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa flaMT13F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaMT13F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.flaMT13F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monVAN14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa monVAN14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monVAN14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.monVAN14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaJX13F31.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa flaJX13F31.vs.flaVAN14F20.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaJX13F31.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.flaJX13F31.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.mon4Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa mon4Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.mon4Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.mon4Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaMB14F10.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf -g flaVAN14F20.ctg.v0.unmasked.fa flaMB14F10.vs.flaVAN14F20.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaMB14F10.vs.flaVAN14F20.ctg.v0.unmasked.MD.bcf > delly.flaMB14F10.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf
+
+delly call -o /scratch/npoikela/delly.flaTER14F5.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa flaTER14F5.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaTER14F5.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.flaTER14F5.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.fla3Fall.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa fla3Fall.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.fla3Fall.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.fla3Fall.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaCRAN14F7.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa flaCRAN14F7.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaCRAN14F7.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.flaCRAN14F7.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monJX13F48.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monJX13F48.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monJX13F48.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monJX13F48.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monASH13F13.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monASH13F13.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monASH13F13.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monASH13F13.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaASH13F2.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa flaASH13F2.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaASH13F2.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.flaASH13F2.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monMB14F1.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monMB14F1.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monMB14F1.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monMB14F1.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaVAN14F20.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa flaVAN14F20.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaVAN14F20.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.flaVAN14F20.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monAZA2.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monAZA2.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monAZA2.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monAZA2.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaLB15F3.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa flaLB15F3.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaLB15F3.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.flaLB15F3.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monCRAN14F16.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monCRAN14F16.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monCRAN14F16.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monCRAN14F16.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monSE13F37.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monSE13F37.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monSE13F37.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monSE13F37.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monTER14F11.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monTER14F11.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monTER14F11.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monTER14F11.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monFA13F2.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monFA13F2.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monFA13F2.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monFA13F2.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monAF15F28.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monAF15F28.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monAF15F28.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monAF15F28.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monHO13F3.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monHO13F3.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monHO13F3.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monHO13F3.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaMT13F11.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa flaMT13F11.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaMT13F11.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.flaMT13F11.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monVAN14F1.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa monVAN14F1.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monVAN14F1.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.monVAN14F1.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaJX13F31.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa flaJX13F31.vs.monSE13F37.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaJX13F31.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.flaJX13F31.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.mon4Fall.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa mon4Fall.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.mon4Fall.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.mon4Fall.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaMB14F10.vs.monSE13F37.ctg.v0.unmasked.MD.bcf -g monSE13F37.ctg.v0.unmasked.fa flaMB14F10.vs.monSE13F37.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaMB14F10.vs.monSE13F37.ctg.v0.unmasked.MD.bcf > delly.flaMB14F10.vs.monSE13F37.ctg.v0.unmasked.MD.vcf
+
+delly call -o /scratch/npoikela/delly.flaTER14F5.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa flaTER14F5.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaTER14F5.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.flaTER14F5.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.fla3Fall.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa fla3Fall.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.fla3Fall.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.fla3Fall.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaCRAN14F7.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa flaCRAN14F7.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaCRAN14F7.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.flaCRAN14F7.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monJX13F48.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monJX13F48.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monJX13F48.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monJX13F48.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monASH13F13.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monASH13F13.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monASH13F13.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monASH13F13.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaASH13F2.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa flaASH13F2.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaASH13F2.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.flaASH13F2.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monMB14F1.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monMB14F1.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monMB14F1.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monMB14F1.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaVAN14F20.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa flaVAN14F20.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaVAN14F20.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.flaVAN14F20.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monAZA2.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monAZA2.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monAZA2.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monAZA2.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaLB15F3.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa flaLB15F3.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaLB15F3.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.flaLB15F3.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monCRAN14F16.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monCRAN14F16.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monCRAN14F16.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monCRAN14F16.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monSE13F37.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monSE13F37.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monSE13F37.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monSE13F37.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monTER14F11.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monTER14F11.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monTER14F11.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monTER14F11.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monFA13F2.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monFA13F2.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monFA13F2.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monFA13F2.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monAF15F28.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monAF15F28.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monAF15F28.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monAF15F28.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monHO13F3.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monHO13F3.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.monHO13F3.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monHO13F3.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaMT13F11.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa flaMT13F11.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaMT13F11.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.flaMT13F11.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.monVAN14F1.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa monVAN14F1.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.monVAN14F1.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.monVAN14F1.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaJX13F31.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa flaJX13F31.vs.monJX13F48.ctg.v0.unmasked.MD.rg.bam
+bcftools view /scratch/npoikela/delly.flaJX13F31.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.flaJX13F31.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.mon4Fall.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa mon4Fall.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.mon4Fall.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.mon4Fall.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+delly call -o /scratch/npoikela/delly.flaMB14F10.vs.monJX13F48.ctg.v0.unmasked.MD.bcf -g monJX13F48.ctg.v0.unmasked.fa flaMB14F10.vs.monJX13F48.ctg.v0.unmasked.MD.bam
+bcftools view /scratch/npoikela/delly.flaMB14F10.vs.monJX13F48.ctg.v0.unmasked.MD.bcf > delly.flaMB14F10.vs.monJX13F48.ctg.v0.unmasked.MD.vcf
+
+
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monTER14F11.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monTER14F11.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monAZA2.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monAZA2.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaTER14F5.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.flaTER14F5.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monFA13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monFA13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.fla3Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.fla3Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monAF15F28.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monAF15F28.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaCRAN14F7.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.flaCRAN14F7.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monHO13F3.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monHO13F3.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaLB15F3.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.flaLB15F3.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaMT13F11.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.flaMT13F11.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf 
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monASH13F13.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monASH13F13.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monCRAN14F16.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monCRAN14F16.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monVAN14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monVAN14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaASH13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.flaASH13F2.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaJX13F31.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.flaJX13F31.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monMB14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monMB14F1.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.mon4Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.mon4Fall.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaVAN14F20.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.flaVAN14F20.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaMB14F10.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.flaMB14F10.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.MD.vcf > delly.monSE13F37.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf
+
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monTER14F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monTER14F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monAZA2.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monAZA2.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaTER14F5.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.flaTER14F5.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monFA13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monFA13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.fla3Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.fla3Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monAF15F28.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monAF15F28.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaCRAN14F7.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.flaCRAN14F7.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monHO13F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monHO13F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaLB15F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.flaLB15F3.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaMT13F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.flaMT13F11.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf 
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monASH13F13.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monASH13F13.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monCRAN14F16.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monCRAN14F16.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monVAN14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monVAN14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaASH13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.flaASH13F2.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaJX13F31.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.flaJX13F31.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monMB14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monMB14F1.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.mon4Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.mon4Fall.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaVAN14F20.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.flaVAN14F20.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaMB14F10.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.flaMB14F10.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.MD.vcf > delly.monSE13F37.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf
+
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monTER14F11.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monTER14F11.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monAZA2.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monAZA2.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaTER14F5.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.flaTER14F5.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monFA13F2.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monFA13F2.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.fla3Fall.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.fla3Fall.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monAF15F28.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monAF15F28.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaCRAN14F7.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.flaCRAN14F7.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monHO13F3.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monHO13F3.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monJX13F48.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monJX13F48.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaLB15F3.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.flaLB15F3.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaMT13F11.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.flaMT13F11.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf 
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monASH13F13.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monASH13F13.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monCRAN14F16.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monCRAN14F16.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monVAN14F1.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monVAN14F1.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaASH13F2.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.flaASH13F2.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaJX13F31.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.flaJX13F31.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monMB14F1.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monMB14F1.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.mon4Fall.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.mon4Fall.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaVAN14F20.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.flaVAN14F20.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaMB14F10.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.flaMB14F10.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monSE13F37.vs.monSE13F37.ctg.v0.unmasked.MD.vcf > delly.monSE13F37.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf
+
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monTER14F11.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monTER14F11.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monAZA2.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monAZA2.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaTER14F5.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.flaTER14F5.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monFA13F2.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monFA13F2.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.fla3Fall.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.fla3Fall.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monAF15F28.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monAF15F28.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaCRAN14F7.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.flaCRAN14F7.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monHO13F3.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monHO13F3.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monJX13F48.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monJX13F48.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaLB15F3.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.flaLB15F3.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaMT13F11.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.flaMT13F11.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf 
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monASH13F13.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monASH13F13.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monCRAN14F16.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monCRAN14F16.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monVAN14F1.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monVAN14F1.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaASH13F2.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.flaASH13F2.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaJX13F31.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.flaJX13F31.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monMB14F1.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monMB14F1.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.mon4Fall.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.mon4Fall.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaVAN14F20.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.flaVAN14F20.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.flaMB14F10.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.flaMB14F10.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+awk -v OFS='\t' '{ if($7=="PASS") print }' delly.monSE13F37.vs.monJX13F48.ctg.v0.unmasked.MD.vcf > delly.monSE13F37.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf
+
+
+#### Signals from both long and short reads; SURVIVOR ####
+
+ls flaMT13F11.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.vcf > flaMT13F11.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge flaMT13F11.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 flaMT13F11.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls flaMT13F11.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.vcf > flaMT13F11.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge flaMT13F11.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 flaMT13F11.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls flaMT13F11.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.vcf > flaMT13F11.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge flaMT13F11.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 flaMT13F11.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls flaMT13F11.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.vcf > flaMT13F11.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge flaMT13F11.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 flaMT13F11.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+
+ls flaVAN14F20.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.vcf > flaVAN14F20.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge flaVAN14F20.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 flaVAN14F20.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls flaVAN14F20.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.vcf > flaVAN14F20.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge flaVAN14F20.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 flaVAN14F20.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls flaVAN14F20.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.vcf > flaVAN14F20.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge flaVAN14F20.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 flaVAN14F20.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls flaVAN14F20.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.vcf > flaVAN14F20.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge flaVAN14F20.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 flaVAN14F20.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+
+ls monSE13F37.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.vcf > monSE13F37.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge monSE13F37.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 monSE13F37.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls monSE13F37.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.vcf > monSE13F37.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge monSE13F37.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 monSE13F37.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls monSE13F37.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.vcf > monSE13F37.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge monSE13F37.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 monSE13F37.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls monSE13F37.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.vcf > monSE13F37.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge monSE13F37.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 monSE13F37.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+
+ls monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.vcf > monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.vcf > monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls monJX13F48.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.vcf > monJX13F48.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge monJX13F48.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 monJX13F48.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+ls monJX13F48.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.vcf > monJX13F48.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf
+SURVIVOR merge monJX13F48.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.raw_calls.vcf 1000 1 -1 -1 -1 500000 monJX13F48.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf
+
+
+ls delly.mon*.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf > delly.mon.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly.mon.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 1000 9 -1 -1 -1 500000 delly.mon.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls delly.fla*.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.vcf > delly.fla.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly.fla.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 1000 6 -1 -1 -1 500000 delly.fla.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.survivor.vcf
+
+ls delly.mon*.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf > delly.mon.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly.mon.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 1000 9 -1 -1 -1 500000 delly.mon.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls delly.fla*.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.vcf > delly.fla.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly.fla.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 1000 6 -1 -1 -1 500000 delly.fla.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.survivor.vcf
+
+ls delly.mon*.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf > delly.mon.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly.mon.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 1000 9 -1 -1 -1 500000 delly.mon.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls delly.fla*.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.vcf > delly.fla.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly.fla.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 1000 6 -1 -1 -1 500000 delly.fla.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.survivor.vcf
+
+ls delly.mon*.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf > delly.mon.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly.mon.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 1000 9 -1 -1 -1 500000 delly.mon.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls delly.fla*.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.vcf > delly.fla.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly.fla.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.dataset.vcf 1000 6 -1 -1 -1 500000 delly.fla.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.survivor.vcf
+
+
+ls flaMT13F11.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.fla.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_fla.flaMT13F11_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_fla.flaMT13F11_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_fla.flaMT13F11_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls flaVAN14F20.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.fla.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_fla.flaVAN14F20_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_fla.flaVAN14F20_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_fla.flaVAN14F20_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls monSE13F37.pacbio.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.mon.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_mon.monSE13F37_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_mon.monSE13F37_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_mon.monSE13F37_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls monJX13F48.vs.flaMT13F11.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.mon.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_mon.monJX13F48_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_mon.monJX13F48_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_mon.monJX13F48_pacbio.vs.flaMT13F11.ctg.v0.unmasked.MD.PASS.survivor.vcf
+
+ls flaVAN14F20.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.fla.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_fla.flaVAN14F20_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_fla.flaVAN14F20_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_fla.flaVAN14F20_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls flaMT13F11.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.fla.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_fla.flaMT13F11_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_fla.flaMT13F11_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_fla.flaMT13F11_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls monSE13F37.pacbio.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.mon.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_mon.monSE13F37_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_mon.monSE13F37_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_mon.monSE13F37_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls monJX13F48.vs.flaVAN14F20.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.mon.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_mon.monJX13F48_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_mon.monJX13F48_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_mon.monJX13F48_pacbio.vs.flaVAN14F20.ctg.v0.unmasked.MD.PASS.survivor.vcf
+
+ls flaMT13F11.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.fla.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_fla.flaMT13F11_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_fla.flaMT13F11_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_fla.flaMT13F11_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls flaVAN14F20.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.fla.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_fla.flaVAN14F20_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_fla.flaVAN14F20_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_fla.flaVAN14F20_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls monSE13F37.pacbio.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.mon.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_mon.monSE13F37_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_mon.monSE13F37_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_mon.monSE13F37_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls monJX13F48.vs.monSE13F37.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.mon.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_mon.monJX13F48_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_mon.monJX13F48_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_mon.monJX13F48_pacbio.vs.monSE13F37.ctg.v0.unmasked.MD.PASS.survivor.vcf
+
+ls flaMT13F11.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.fla.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_fla.flaMT13F11_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_fla.flaMT13F11_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_fla.flaMT13F11_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls flaVAN14F20.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.fla.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_fla.flaVAN14F20_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_fla.flaVAN14F20_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_fla.flaVAN14F20_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls monSE13F37.pacbio.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.mon.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_mon.monSE13F37_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_mon.monSE13F37_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_mon.monSE13F37_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.survivor.vcf
+ls monJX13F48.vs.monJX13F48.ctg.v0.unmasked.ngmlr.sniffles.survivor.vcf delly.mon.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.survivor.vcf > delly_mon.monJX13F48_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf
+SURVIVOR merge delly_mon.monJX13F48_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.raw_calls.vcf 10000 2 -1 -1 -1 500000 delly_mon.monJX13F48_pacbio.vs.monJX13F48.ctg.v0.unmasked.MD.PASS.survivor.vcf
+
+
+
+
+
+
+#### ILLUSTRATION WITH NUCMER ####
+
+# https://dot.sandbox.bio/
+
+# nano DotPrep.py
+#! /usr/bin/env python
+
+# Author: Maria Nattestad
+# Email: mnattestad@dnanexus.com
+
+# This script prepares a nucmer output delta file for visualization in Dot
+# Parts of this code is adapted from Assemblytics unique anchor filtering
+
+
+import argparse
+import gzip
+import time
+import numpy as np
+import operator
+import re
+
+def run(args):
+    filename = args.delta
+    unique_length = args.unique_length
+    output_filename = args.out
+    keep_small_uniques = True
+    max_overview_alignments = args.overview
+
+    # Read through the file and store information indexed by Query sequence names
+    header_lines_by_query, lines_by_query = getQueryRefCombinations(filename)
+
+    # Figure out which alignments contain sufficient unique anchor sequences
+    unique_alignments = calculateUniqueness(header_lines_by_query, lines_by_query, unique_length, keep_small_uniques)
+
+    # Write a filtered delta file, and coordinate files with uniqueness tags
+    reference_lengths, fields_by_query = writeFilteredDeltaFile(filename, output_filename, unique_alignments, unique_length, header_lines_by_query)
+    
+    index_for_dot(reference_lengths, fields_by_query, output_filename, max_overview_alignments)
+
+
+def scrub(string):
+    return string.replace(",","_").replace("!","_").replace("~","_").replace("#", "_")
+
+
+def getQueryRefCombinations(filename):
+    print("header from delta file:")
+    
+    try:
+        f = gzip.open(filename, 'rt')
+        print(f.readline().strip())
+    except:
+        f = open(filename, 'r')
+        print(f.readline().strip())
+
+    # Ignore the first two lines for now
+    print(f.readline().strip())
+
+    linecounter = 0
+
+    current_query_name = ""
+    current_header = ""
+
+    lines_by_query = {}
+    header_lines_by_query = {}
+
+    before = time.time()
+
+    for line in f:
+        if line[0]==">":
+            linecounter += 1
+            current_header = line.strip()
+            current_query_name = scrub(current_header.split()[1])
+            
+            if header_lines_by_query.get(current_query_name, None) == None:
+                lines_by_query[current_query_name] = []
+                header_lines_by_query[current_query_name] = []
+        else:
+            fields = line.strip().split()
+            if len(fields) > 4:
+                # sometimes start and end are the other way around, but for this they need to be in order
+                query_min = min([int(fields[2]),int(fields[3])])
+                query_max = max([int(fields[2]),int(fields[3])])
+                lines_by_query[current_query_name].append((query_min,query_max))
+                header_lines_by_query[current_query_name].append(current_header)
+
+    f.close()
+
+    print("First read through the file: %d seconds for %d query-reference combinations" % (time.time()-before,linecounter))
+    
+    return (header_lines_by_query, lines_by_query)
+
+def calculateUniqueness(header_lines_by_query, lines_by_query, unique_length, keep_small_uniques):
+    before = time.time()
+    unique_alignments = {}
+    num_queries = len(lines_by_query)
+    print("Filtering alignments of %d queries" % (num_queries))
+    
+    num_query_step_to_report = num_queries/100
+    if num_queries < 100:
+        num_query_step_to_report = num_queries/10
+    if num_queries < 10:
+        num_query_step_to_report = 1
+
+    query_counter = 0
+
+    for query in lines_by_query:
+        unique_alignments[query] = summarize_planesweep(lines_by_query[query], unique_length_required = unique_length, keep_small_uniques = keep_small_uniques)
+        query_counter += 1
+        if (query_counter % num_query_step_to_report) == 0:
+            print("Progress: %d%%" % (query_counter*100/num_queries))
+    
+    print("Progress: 100%")
+
+    print("Deciding which alignments to keep: %d seconds for %d queries" % (time.time()-before,num_queries))
+
+    return unique_alignments
+
+
+def summarize_planesweep(lines,unique_length_required, keep_small_uniques=False):
+
+    unique_alignments = []
+
+    # If no alignments:
+    if len(lines)==0:
+        return []
+
+    # If only one alignment:
+    if len(lines) == 1:
+        if keep_small_uniques == True or abs(lines[0][1] - lines[0][0]) >= unique_length_required:
+            return [0]
+        else:
+            return []
+
+    starts_and_stops = []
+    for query_min,query_max in lines:
+        starts_and_stops.append((query_min,"start"))
+        starts_and_stops.append((query_max,"stop"))
+
+
+    sorted_starts_and_stops = sorted(starts_and_stops,key=operator.itemgetter(0))
+
+    current_coverage = 0
+    last_position = -1
+    sorted_unique_intervals_left = []
+    sorted_unique_intervals_right = []
+    for pos,change in sorted_starts_and_stops:
+        if current_coverage == 1:
+            sorted_unique_intervals_left.append(last_position)
+            sorted_unique_intervals_right.append(pos)
+
+        if change == "start":
+            current_coverage += 1
+        else:
+            current_coverage -= 1
+        last_position = pos
+
+
+    linecounter = 0
+    for query_min,query_max in lines:
+
+        i = binary_search(query_min,sorted_unique_intervals_left,0,len(sorted_unique_intervals_left))
+
+        exact_match = False
+        if sorted_unique_intervals_left[i] == query_min and sorted_unique_intervals_right[i] == query_max:
+            exact_match = True
+        sum_uniq = 0
+        while i < len(sorted_unique_intervals_left) and sorted_unique_intervals_left[i] >= query_min and sorted_unique_intervals_right[i] <= query_max:
+            sum_uniq += sorted_unique_intervals_right[i] - sorted_unique_intervals_left[i]
+            i += 1
+
+        if sum_uniq >= unique_length_required:
+            unique_alignments.append(linecounter)
+        elif keep_small_uniques == True and exact_match == True:
+            unique_alignments.append(linecounter)
+
+        linecounter += 1
+
+    return unique_alignments
+
+
+
+def binary_search(query, numbers, left, right):
+    #  Returns index of the matching element or the first element to the right
+    
+    if left >= right:
+        return right
+    mid = int((right+left)/2)
+    
+
+    if query == numbers[mid]:
+        return mid
+    elif query < numbers[mid]:
+        return binary_search(query,numbers,left,mid)
+    else: # if query > numbers[mid]:
+        return binary_search(query,numbers,mid+1,right)
+
+
+def natural_key(string_):
+    """See http://www.codinghorror.com/blog/archives/001018.html"""
+    return [int(s) if s.isdigit() else s for s in re.split(r'(\d+)', string_)]
+
+def writeFilteredDeltaFile(filename, output_filename, unique_alignments, unique_length, header_lines_by_query):
+    before = time.time()
+    f_out_delta = gzip.open(output_filename + ".uniqueAnchorFiltered_l%d.delta.gz" % (unique_length),'wt')
+    
+    try:
+        f = gzip.open(filename, 'rt')
+        header1 = f.readline()
+    except:
+        f = open(filename, 'r')
+        header1 = f.readline()
+        
+    f_out_delta.write(header1) # write the first line that we read already
+    f_out_delta.write(f.readline())
+    
+    linecounter = 0
+
+    # For filtered delta file:
+    list_of_unique_alignments = []
+    alignment_counter = {}
+    keep_printing = False
+
+    # For coords:
+    current_query_name = ""
+    current_query_position = 0
+
+    # For basic assembly stats:
+    ref_sequences = set()
+    query_sequences = set()
+    reference_lengths = []
+    query_lengths = {}
+    fields_by_query = {}
+
+
+    for line in f:
+        linecounter += 1
+        if line[0]==">":
+            fields = line.strip().split()
+            
+            # For delta file output:
+            query = scrub(fields[1])
+            list_of_unique_alignments = unique_alignments[query]
+
+            header_needed = False
+            for index in list_of_unique_alignments:
+                if line.strip() == header_lines_by_query[query][index]:
+                    header_needed = True
+            if header_needed == True:
+                f_out_delta.write(line) # if we have any alignments under this header, print(the header)
+            alignment_counter[query] = alignment_counter.get(query,0)
+
+            # For coords:
+            current_reference_name = scrub(fields[0][1:])
+            current_query_name = scrub(fields[1])
+
+            current_reference_size = int(fields[2])
+            current_query_size = int(fields[3])
+
+            # For index:
+            if not current_reference_name in ref_sequences:
+                reference_lengths.append((current_reference_name, current_reference_size))
+                ref_sequences.add(current_reference_name)
+            if not current_query_name in query_sequences:
+                query_lengths[current_query_name] = current_query_size
+                query_sequences.add(current_query_name)
+
+        else:
+            fields = line.strip().split()
+            if len(fields) > 4:
+                # For coords:
+                ref_start = int(fields[0])
+                ref_end = int(fields[1])
+                query_start = int(fields[2])
+                query_end = int(fields[3])
+                csv_tag = "repetitive"
+                if alignment_counter[query] in list_of_unique_alignments:
+                    f_out_delta.write(line)
+                    csv_tag = "unique"
+                    keep_printing = True
+                else:
+                    keep_printing = False
+                fields = [ref_start, ref_end, query_start, query_end, current_reference_size, current_query_size, current_reference_name, current_query_name, csv_tag]
+                if fields_by_query.get(current_query_name, None) == None:
+                    fields_by_query[current_query_name] = []
+                fields_by_query[current_query_name].append(fields)
+                alignment_counter[query] = alignment_counter[query] + 1
+
+            elif keep_printing == True:
+                f_out_delta.write(line)
+
+    f.close()
+    f_out_delta.close()
+    # f_out_coords.close()
+
+    print("Writing filtered delta file and capturing information for coords file: %d seconds for %d total lines in file" % (time.time()-before,linecounter))
+    
+    return reference_lengths, fields_by_query
+
+def index_for_dot(reference_lengths, fields_by_query, output_prefix, max_overview_alignments):
+
+    #  Find the order of the reference chromosomes
+    reference_lengths.sort(key=lambda x: natural_key(x[0]))
+    
+    #  Find the cumulative sums
+    cumulative_sum = 0
+    ref_chrom_offsets = {}
+    queries_by_reference = {}
+    for ref,ref_length in reference_lengths:
+        ref_chrom_offsets[ref] = cumulative_sum
+        cumulative_sum += ref_length
+        queries_by_reference[ref] = set()
+
+    #  Calculate relative positions of each alignment in this cumulative length, and take the median of these for each query, then sort the queries by those scores
+    flip_by_query = {}
+    unique_references_by_query = {} # for index, only unique alignments
+    all_references_by_query = {} # for index, including repetitive alignments
+    relative_ref_position_by_query = [] # for ordering
+
+
+    ordered_tags = ["unique", "repetitive"]
+
+
+    f_out_coords = open(output_prefix + ".coords", 'w')
+    f_out_coords.write("ref_start,ref_end,query_start,query_end,ref\n")
+
+    query_byte_positions = {}
+    query_lengths = {}
+
+    all_alignments = []
+    last_query = ""
+
+    for query_name in fields_by_query:
+
+        lines = fields_by_query[query_name]
+        sum_forward = 0
+        sum_reverse = 0
+        ref_position_scores = []
+        unique_references_by_query[query_name] = set()
+        all_references_by_query[query_name] = set()
+
+        for fields in lines:
+            tag = fields[8]
+
+            query_name = fields[7]
+            query_lengths[query_name] = int(fields[5])
+
+            all_references_by_query[query_name].add(ref)
+            # Only use unique alignments to decide contig orientation
+            if tag == "unique":
+                query_stop = int(fields[3])
+                query_start = int(fields[2])
+                ref_start = int(fields[0])
+                ref_stop = int(fields[1])
+                alignment_length = abs(int(fields[3])-int(fields[2]))
+                ref = fields[6]
+
+                # for index:
+                unique_references_by_query[query_name].add(ref)
+                queries_by_reference[ref].add(query_name)
+
+                # for ordering:
+                ref_position_scores.append(ref_chrom_offsets[ref] + (ref_start+ref_stop)/2)
+
+                # for orientation:
+                if query_stop < query_start:
+                    sum_reverse += alignment_length
+                else:
+                    sum_forward += alignment_length
+
+        # orientation:
+        flip = sum_reverse > sum_forward
+        flip_by_query[query_name] = "-" if (flip == True) else "+"
+
+
+        for tag in ordered_tags:
+            query_byte_positions[(last_query, "end")] = f_out_coords.tell()
+            query_byte_positions[(query_name, tag)] = f_out_coords.tell()
+            f_out_coords.write("!" + query_name + "!" + tag +"\n")
+            
+            for fields in lines:
+                if fields[8] == tag:
+                    if flip == True:
+                        fields[2] = int(fields[5]) - int(fields[2])
+                        fields[3] = int(fields[5]) - int(fields[3])
+
+                    output_fields = [fields[0], fields[1], fields[2], fields[3], fields[6]]
+                    f_out_coords.write(",".join([str(i) for i in output_fields]) + "\n")
+                    
+                    # For alignment overview:
+                    alignment_length = abs(int(fields[3])-int(fields[2]))
+                    all_alignments.append(([fields[0], fields[1], fields[2], fields[3], fields[6], fields[7], fields[8]], alignment_length))
+
+        # ordering
+        if len(ref_position_scores) > 0:
+            relative_ref_position_by_query.append((query_name,np.median(ref_position_scores)))
+        else:
+            relative_ref_position_by_query.append((query_name,0))
+
+        last_query = query_name
+
+
+    query_byte_positions[(last_query, "end")] = f_out_coords.tell()
+
+    relative_ref_position_by_query.sort(key=lambda x: x[1])
+
+    f_out_index = open(output_prefix + ".coords.idx", 'w')
+
+    f_out_index.write("#ref\n")
+    f_out_index.write("ref,ref_length,matching_queries\n")
+    # reference_lengths is sorted by the reference chromosome name
+    for ref,ref_length in reference_lengths:
+        f_out_index.write("%s,%d,%s\n" % (ref,ref_length,"~".join(queries_by_reference[ref])))
+
+    f_out_index.write("#query\n")
+    f_out_index.write("query,query_length,orientation,bytePosition_unique,bytePosition_repetitive,bytePosition_end,unique_matching_refs,matching_refs\n")
+    # relative_ref_position_by_query is sorted by rel_pos
+    for query,rel_pos in relative_ref_position_by_query:
+        f_out_index.write("%s,%d,%s,%d,%d,%d,%s,%s\n" % (query, query_lengths[query], flip_by_query[query], query_byte_positions[(query,"unique")], query_byte_positions[(query,"repetitive")] - query_byte_positions[(query,"unique")], query_byte_positions[(query,"end")] - query_byte_positions[(query,"repetitive")], "~".join(unique_references_by_query[query]), "~".join(all_references_by_query[query])))
+
+    f_out_index.write("#overview\n")
+    f_out_index.write("ref_start,ref_end,query_start,query_end,ref,query,tag\n")
+
+    num_overview_alignments = min(max_overview_alignments,len(all_alignments))
+    if num_overview_alignments < len(all_alignments):
+        print("Included the longest " + str(max_overview_alignments) + " alignments in the index under #overview (change this with the --overview parameter), out of a total of " + str(len(all_alignments)) + " alignments.")
+
+    all_alignments.sort(key=lambda x: -x[1])
+    overview_alignments = all_alignments[0:num_overview_alignments]
+    for tup in overview_alignments:
+        f_out_index.write(",".join([str(i) for i in tup[0]]) + "\n")
+
+    f_out_index.close()
+
+def main():
+    parser=argparse.ArgumentParser(description="Take a delta file, apply Assemblytics unique anchor filtering, and prepare coordinates input files for Dot")
+    parser.add_argument("--delta",help="delta file" ,dest="delta", type=str, required=True)
+    parser.add_argument("--out",help="output file" ,dest="out", type=str, default="output")
+    parser.add_argument("--unique-length",help="The total length of unique sequence an alignment must have on the query side to be retained. Default: 10000" ,dest="unique_length",type=int, default=10000)
+    parser.add_argument("--overview",help="The number of alignments to include in the coords.idx output file, which will be shown in the overview for Dot. Default: 1000" ,dest="overview",type=int, default=1000)
+    parser.set_defaults(func=run)
+    args=parser.parse_args()
+    args.func(args)
+
+if __name__=="__main__":
+    main()
+
+
+## D. lummei vs D. montana / D. flavomontana
+nucmer --mum -c 100 -t 16 --prefix=nucmer/monSE13F37.vs.Dlummei Dlummei.ctg.v0.unmasked.fa monSE13F37.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/monSE13F37.vs.Dlummei.delta --unique-length 100000 --overview 10000 --out nucmer/monSE13F37.vs.Dlummei.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/Dlummei.vs.monSE13F37 monSE13F37.ctg.v0.unmasked.fa Dlummei.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/Dlummei.vs.monSE13F37.delta --unique-length 100000 --overview 10000 --out nucmer/Dlummei.vs.monSE13F37.delta.dot.L100000
+
+nucmer --mum -c 100 -t 16 --prefix=nucmer/monSE13F37.vs.monJX13F48 monJX13F48.ctg.v0.unmasked.fa monSE13F37.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/monSE13F37.vs.monJX13F48.delta --unique-length 100000 --overview 10000 --out nucmer/monSE13F37.vs.monJX13F48.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/monJX13F48.vs.monSE13F37 monSE13F37.ctg.v0.unmasked.fa monJX13F48.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/monJX13F48.vs.monSE13F37.delta --unique-length 100000 --overview 10000 --out nucmer/monJX13F48.vs.monSE13F37.delta.dot.L100000
+
+nucmer --mum -c 100 -t 16 --prefix=nucmer/monJX13F48.vs.Dlummei Dlummei.ctg.v0.unmasked.fa monJX13F48.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/monJX13F48.vs.Dlummei.delta --unique-length 100000 --overview 10000 --out nucmer/monJX13F48.vs.Dlummei.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/Dlummei.vs.monJX13F48 monJX13F48.ctg.v0.unmasked.fa Dlummei.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/Dlummei.vs.monJX13F48.delta --unique-length 100000 --overview 10000 --out nucmer/Dlummei.vs.monJX13F48.delta.dot.L100000
+
+nucmer --mum -c 100 -t 16 --prefix=nucmer/flaMT13F11.vs.Dlummei Dlummei.ctg.v0.unmasked.fa flaMT13F11.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/flaMT13F11.vs.Dlummei.delta --unique-length 100000 --overview 10000 --out nucmer/flaMT13F11.vs.Dlummei.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/Dlummei.vs.flaMT13F11 flaMT13F11.ctg.v0.unmasked.fa Dlummei.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/Dlummei.vs.flaMT13F11.delta --unique-length 100000 --overview 10000 --out nucmer/Dlummei.vs.flaMT13F11.delta.dot.L100000
+
+nucmer --mum -c 100 -t 16 --prefix=nucmer/flaVAN14F20.vs.Dlummei Dlummei.ctg.v0.unmasked.fa flaVAN14F20.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/flaVAN14F20.vs.Dlummei.delta --unique-length 100000 --overview 10000 --out nucmer/flaVAN14F20.vs.Dlummei.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/Dlummei.vs.flaVAN14F20 flaVAN14F20.ctg.v0.unmasked.fa Dlummei.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/Dlummei.vs.flaVAN14F20.delta --unique-length 100000 --overview 10000 --out nucmer/Dlummei.vs.flaVAN14F20.delta.dot.L100000
+
+
+## D. montana vs D. flavomontana
+nucmer --mum -c 100 -t 16 --prefix=nucmer/monSE13F37.vs.monJX13F48 monJX13F48.ctg.v0.unmasked.fa monSE13F37.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/monSE13F37.vs.monJX13F48.delta --unique-length 100000 --overview 10000 --out nucmer/monSE13F37.vs.monJX13F48.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/monSE13F37.vs.flaMT13F11 flaMT13F11.ctg.v0.unmasked.fa monSE13F37.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/monSE13F37.vs.flaMT13F11.delta --unique-length 100000 --overview 10000 --out nucmer/monSE13F37.vs.flaMT13F11.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/monSE13F37.vs.flaVAN14F20 flaVAN14F20.ctg.v0.unmasked.fa monSE13F37.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/monSE13F37.vs.flaVAN14F20.delta --unique-length 100000 --overview 10000 --out nucmer/monSE13F37.vs.flaVAN14F20.delta.dot.L100000
+
+nucmer --mum -c 100 -t 16 --prefix=nucmer/monJX13F48.vs.monSE13F37 monSE13F37.ctg.v0.unmasked.fa monJX13F48.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/monJX13F48.vs.monSE13F37.delta --unique-length 100000 --overview 10000 --out nucmer/monJX13F48.vs.monSE13F37.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/monJX13F48.vs.flaMT13F11 flaMT13F11.ctg.v0.unmasked.fa monJX13F48.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/monJX13F48.vs.flaMT13F11.delta --unique-length 100000 --overview 10000 --out nucmer/monJX13F48.vs.flaMT13F11.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/monJX13F48.vs.flaVAN14F20 flaVAN14F20.ctg.v0.unmasked.fa monJX13F48.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/monJX13F48.vs.flaVAN14F20.delta --unique-length 100000 --overview 10000 --out nucmer/monJX13F48.vs.flaVAN14F20.delta.dot.L100000
+
+nucmer --mum -c 100 -t 16 --prefix=nucmer/flaMT13F11.vs.monSE13F37 monSE13F37.ctg.v0.unmasked.fa flaMT13F11.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/flaMT13F11.vs.monSE13F37.delta --unique-length 100000 --overview 10000 --out nucmer/flaMT13F11.vs.monSE13F37.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/flaMT13F11.vs.monJX13F48 monJX13F48.ctg.v0.unmasked.fa flaMT13F11.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/flaMT13F11.vs.monJX13F48.delta --unique-length 100000 --overview 10000 --out nucmer/flaMT13F11.vs.monJX13F48.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/flaMT13F11.vs.flaVAN14F20 flaVAN14F20.ctg.v0.unmasked.fa flaMT13F11.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/flaMT13F11.vs.flaVAN14F20.delta --unique-length 100000 --overview 10000 --out nucmer/flaMT13F11.vs.flaVAN14F20.delta.dot.L100000
+
+nucmer --mum -c 100 -t 16 --prefix=nucmer/flaVAN14F20.vs.monSE13F37 monSE13F37.ctg.v0.unmasked.fa flaVAN14F20.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/flaVAN14F20.vs.monSE13F37.delta --unique-length 100000 --overview 10000 --out nucmer/flaVAN14F20.vs.monSE13F37.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/flaVAN14F20.vs.monJX13F48 monJX13F48.ctg.v0.unmasked.fa flaVAN14F20.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/flaVAN14F20.vs.monJX13F48.delta --unique-length 100000 --overview 10000 --out nucmer/flaVAN14F20.vs.monJX13F48.delta.dot.L100000
+nucmer --mum -c 100 -t 16 --prefix=nucmer/flaVAN14F20.vs.flaMT13F11 flaMT13F11.ctg.v0.unmasked.fa flaVAN14F20.ctg.v0.unmasked.fa
+python DotPrep.py --delta nucmer/flaVAN14F20.vs.flaMT13F11.delta --unique-length 100000 --overview 10000 --out nucmer/flaVAN14F20.vs.flaMT13F11.delta.dot.L100000
