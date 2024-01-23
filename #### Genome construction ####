@@ -1,0 +1,431 @@
+#### Genome construction Poikela et al. 2024 ####
+
+
+## Genome assembly
+
+# masurca assembler
+# config file:
+DATA
+PE= aa 150 10 /scratch/dmonas/nopapoik/0_illumina_rawreads_wildcaught/VAN14F20/VAN14F20/170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_1.fastq.gz /scratch/dmonas/nopapoik/0_illumina_rawreads_wildcaught/VAN14F20/VAN14F20/170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_2.fastq.gz
+PE= bb 150 10 /scratch/dmonas/nopapoik/0_illumina_rawreads_wildcaught/VAN14F20/VAN14F20/170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_1.fastq.gz /scratch/dmonas/nopapoik/0_illumina_rawreads_wildcaught/VAN14F20/VAN14F20/170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_2.fastq.gz
+PACBIO= /scratch/dmonas/nopapoik/0_PacBio_raw_reads/flaVAN14F20/flaVAN14F20.pacbio.fastq.gz
+END
+
+PARAMETERS
+#PLEASE READ all comments to essential parameters below, and set the parameters according to your project
+#set this to 1 if your Illumina jumping library reads are shorter than 100bp
+EXTEND_JUMP_READS=0
+#this is k-mer size for deBruijn graph values between 25 and 127 are supported, auto will compute the optimal size based on the read data and GC content
+GRAPH_KMER_SIZE = auto
+#set this to 1 for all Illumina-only assemblies
+#set this to 0 if you have more than 15x coverage by long reads (Pacbio or Nanopore) or any other long reads/mate pairs (Illumina MP, Sanger, 454, etc)
+USE_LINKING_MATES = 0
+#specifies whether to run the assembly on the grid
+USE_GRID=0
+#specifies grid engine to use SGE or SLURM
+GRID_ENGINE=SGE
+#specifies queue (for SGE) or partition (for SLURM) to use when running on the grid MANDATORY
+GRID_QUEUE=all.q
+#batch size in the amount of long read sequence for each batch on the grid
+GRID_BATCH_SIZE=500000000
+#use at most this much coverage by the longest Pacbio or Nanopore reads, discard the rest of the reads
+#can increase this to 30 or 35 if your reads are short (N50<7000bp)
+LHE_COVERAGE=35
+#set to 0 (default) to do two passes of mega-reads for slower, but higher quality assembly, otherwise set to 1
+MEGA_READS_ONE_PASS=0
+#this parameter is useful if you have too many Illumina jumping library mates. Typically set it to 60 for bacteria and 300 for the other organisms 
+LIMIT_JUMP_COVERAGE = 300
+#these are the additional parameters to Celera Assembler.  do not worry about performance, number or processors or batch sizes -- these are computed automatically. 
+#CABOG ASSEMBLY ONLY: set cgwErrorRate=0.25 for bacteria and 0.1<=cgwErrorRate<=0.15 for other organisms.
+CA_PARAMETERS =  cgwErrorRate=0.15
+#CABOG ASSEMBLY ONLY: whether to attempt to close gaps in scaffolds with Illumina or long read data
+CLOSE_GAPS=1
+#number of cpus to use, set this to the number of CPUs/threads per node you will be using
+NUM_THREADS = 16
+#this is mandatory jellyfish hash size -- a safe value is estimated_genome_size*20
+JF_SIZE = 400000000
+#ILLUMINA ONLY. Set this to 1 to use SOAPdenovo contigging/scaffolding module.  
+#Assembly will be worse but will run faster. Useful for very large (>=8Gbp) genomes from Illumina-only data
+SOAP_ASSEMBLY=0
+#If you are doing Hybrid Illumina paired end + Nanopore/PacBio assembly ONLY (no Illumina mate pairs or OTHER frg files).  
+#Set this to 1 to use Flye assembler for final assembly of corrected mega-reads.  
+#A lot faster than CABOG, AND QUALITY IS THE SAME OR BETTER. 
+#Works well even when MEGA_READS_ONE_PASS is set to 1.  
+#DO NOT use if you have less than 15x coverage by long reads.
+FLYE_ASSEMBLY=1
+END
+
+MaSuRCA-3.3.9/bin/masurca sr_config_example.txt
+Verifying PATHS...
+jellyfish OK
+runCA OK
+createSuperReadsForDirectory.perl OK
+nucmer OK
+mega_reads_assemble_cluster.sh OK
+creating script file for the actions...done.
+execute assemble.sh to run assembly
+
+
+# wtdbg2 (redbean) assembly
+
+wtdbg2 -x sq -p 0 -k 15 -AS 2 -s 0.05 -L 5000 -g 180m -i flaVAN14F20.pacbio.fastq.gz -fo flaVAN14F20 -t 8
+wtpoa-cns -i flaVAN14F20.ctg.lay.gz -fo flaVAN14F20.ctg.fa
+
+# polishing with PacBio reads
+minimap2 -t 8 -x map-pb -a flaVAN14F20.ctg.fa flaVAN14F20.pacbio.fastq.gz | samtools view -Sb - >flaVAN14F20.ctg.map.bam
+samtools sort -@ 8 flaVAN14F20.ctg.map.bam > flaVAN14F20.ctg.map.srt.bam
+samtools view flaVAN14F20.ctg.map.srt.bam | wtpoa-cns -t 8 -d flaVAN14F20.ctg.fa -i - -fo flaVAN14F20.ctg.2nd.fa
+
+# polishing with Illumina reads
+bwa index flaVAN14F20.ctg.2nd.fa
+bwa mem -t 8 flaVAN14F20.ctg.2nd.fa 170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_1.fastq.gz 170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_2.fastq.gz | samtools view -Sb - >flaVAN14F20.150b.112.bam
+bwa mem -t 8 flaVAN14F20.ctg.2nd.fa 170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_1.fastq.gz 170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_2.fastq.gz | samtools view -Sb - >flaVAN14F20.150b.120.bam
+samtools merge flaVAN14F20.150b.112.120.bam flaVAN14F20.150b.112.bam flaVAN14F20.150b.120.bam
+samtools sort -@ 8 flaVAN14F20.150b.112.120.bam > flaVAN14F20.150b.112.120.srt.bam
+samtools view flaVAN14F20.150b.112.120.srt.bam | wtpoa-cns -t 8 -x sam-sr -d flaVAN14F20.ctg.2nd.fa -i - -fo flaVAN14F20.ctg.3rd.fa
+
+
+## Quickmerge
+merge_wrapper.py --prefix flaVAN14F20.wtdbg2.masurca -l 2747087 flaVAN14F20.masurca_flye.fa flaVAN14F20.ctg.3rd.fa
+
+
+## Pilon polishing
+bwa index merged_flaVAN14F20.wtdbg2.masurca.fasta
+bwa mem -t 20 merged_flaVAN14F20.wtdbg2.masurca.fasta VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_1.fastq.gz VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_2.fastq.gz | samtools view -b - | samtools sort -@20 - -o flaVAN14F20.170112.vs.merged_flaVAN14F20.wtdbg2.masurca.bam
+bwa mem -t 20 merged_flaVAN14F20.wtdbg2.masurca.fasta VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_1.fastq.gz VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_2.fastq.gz  | samtools view -b - | samtools sort -@20 - -o flaVAN14F20.170120.vs.merged_flaVAN14F20.wtdbg2.masurca.bam
+samtools merge flaVAN14F20.vs.merged_flaVAN14F20.wtdbg2.masurca.bam flaVAN14F20.170112.vs.merged_flaVAN14F20.wtdbg2.masurca.bam flaVAN14F20.170120.vs.merged_flaVAN14F20.wtdbg2.masurca.bam
+
+pilon -Xmx400G --genome merged_flaVAN14F20.wtdbg2.masurca.fasta --frags flaVAN14F20.vs.merged_flaVAN14F20.wtdbg2.masurca.bam --output flaVAN14F20.pilon --outdir /scratch/npoikela --changes --tracks --diploid --fix all --threads 64 --mindepth 5
+
+## purge_dups
+
+minimap2 -t 1 -xmap-pb flaVAN14F20.pilon.fasta flaVAN14F20.pacbio.fastq.gz | gzip -c - > flaVAN14F20.pacbio.vs.flaVAN14F20.pilon.paf.gz
+
+# produces PB.base.cov and PB.stat files
+purge_dups/bin/pbcstat *.paf.gz
+purge_dups/bin/calcuts PB.stat > cutoffs 2>calcults.log
+purge_dups/bin/split_fa flaVAN14F20.pilon.fasta > flaVAN14F20.pilon.split
+minimap2 -xasm5 -DP flaVAN14F20.pilon.split flaVAN14F20.pilon.split | gzip -c - > flaVAN14F20.pilon.split.self.paf.gz
+purge_dups/bin/purge_dups -2 -T cutoffs -c PB.base.cov flaVAN14F20.pilon.split.self.paf.gz > dups.bed 2> purge_dups.log
+purge_dups/bin/get_seqs dups.bed flaVAN14F20.pilon.fasta > purged.fa 2> hap.fa
+cp purged.fa flaVAN14F20.pilon.purged.fasta
+
+
+
+## Remove contaminants with Blobtools
+
+# map long and short reads against the assembly
+bwa index flaVAN14F20.pilon.purged.fasta
+bwa mem -t 20 flaVAN14F20.pilon.purged.fasta 0_reads/VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_1.fastq.gz 0_reads/VAN14F20.170112_K00166_0165_AHGJY7BBXX_8_NX-P7-001_NX-P5-017_2.fastq.gz | samtools view -b - | samtools sort -@20 - -o flaVAN14F20.ctgs.libA.150bp.bam
+samtools index flaVAN14F20.ctgs.libA.150bp.bam
+bwa mem -t 20 flaVAN14F20.pilon.purged.fasta 0_reads/VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_1.fastq.gz 0_reads/VAN14F20.170120_K00166_0169_AHH2F2BBXX_6_NX-P7-001_NX-P5-017_2.fastq.gz  | samtools view -b - | samtools sort -@20 - -o flaVAN14F20.ctgs.libB.150bp.bam
+samtools index flaVAN14F20.ctgs.libB.150bp.bam
+minimap2 -t 20 -ax map-pb flaVAN14F20.pilon.purged.fasta 0_reads/flaVAN14F20.pacbio.fastq.gz | samtools view -hF 256 - | samtools sort -@ 20 -m 2G -o flaVAN14F20.ctgs.libC.3nd.bam
+samtools index flaVAN14F20.ctgs.libC.3nd.bam
+
+# blast
+# blastn
+blastn -query flaVAN14F20.pilon.purged.fasta -num_threads 40 -max_target_seqs 10 -max_hsps 1 -db /ceph/software/blast_db/blast/ncbi_2018_01/nt -evalue 1e-25 -outfmt "6 qseqid staxids bitscore std" -out flaVAN14F20.ctgs.vs.ncbi.blast.out
+# diamond (aminoacids)
+/ceph/software/diamond/diamond-v0.9.17/diamond blastx --threads 40 --db /ceph/software/blast_db/diamond/uniprot_2017_12/uniprot_ref_proteomes.dmnd --sensitive --evalue 1e-25 --outfmt 6 --max-target-seqs 10 --query flaVAN14F20.pilon.purged.fasta --out flaVAN14F20.ctgs.vs.unirefprot.diamond.out
+# tafixy diamond file
+/ceph/software/blobtools/blobtools taxify -f flaVAN14F20.ctgs.vs.unirefprot.diamond.out -m /ceph/software/blast_db/diamond/uniprot_2017_12/uniprot_ref_proteomes.taxids -s 0 -t 2
+
+# BlobTools
+conda activate blobtools (conda install -c bioconda blobtools)
+/ceph/software/blobtools/blobtools create -i flaVAN14F20.pilon.purged.fasta -t flaVAN14F20.ctgs.vs.ncbi.blast.out -t flaVAN14F20.ctgs.vs.unirefprot.diamond.taxified.out -x bestsumorder -b flaVAN14F20.ctgs.libA.150bp.bam -b flaVAN14F20.ctgs.libB.150bp.bam -b flaVAN14F20.ctgs.libC.3rd.bam -o flaVAN14F20
+/ceph/software/blobtools/blobtools plot -i flaVAN14F20.blobDB.json -x bestsumorder
+/ceph/software/blobtools/blobtools view -i flaVAN14F20.blobDB.json -x bestsumorder
+/ceph/software/blobtools/blobtools view -i flaVAN14F20.blobDB.json -x bestsumorder --hits --rank all
+
+# how does it look?
+grep -v '^#' flaVAN14F20.blobDB.bestsumorder.table.txt | cut -f9 | sort | uniqc
+
+# check the plots
+flaVAN14F20.blobDB.json.bestsumorder.phylum.p8.span.100.blobplot.covsum.png
+Arthropoda      278
+Tenericutes     1
+no-hit  18
+
+# Are they real?
+awk '$9=="Arthropoda"' flaVAN14F20.blobDB.bestsumorder.table.txt | sort -rnk2 | less
+awk '$9=="no-hit"' flaVAN14F20.blobDB.bestsumorder.table.txt | sort -rnk2 | less
+awk '$9=="Tenericutes"' flaVAN14F20.blobDB.bestsumorder.table.txt | sort -rnk2 | less
+
+# Partition contig_ids
+awk '$9=="Arthropoda" || $9=="no-hit"' flaVAN14F20.blobDB.bestsumorder.table.txt | cut -f1 > flaVAN14F20.blobDB.bestsumorder.table.Arthropoda.contig_ids.txt
+awk '$9=="Tenericutes"' flaVAN14F20.blobDB.bestsumorder.table.txt | cut -f1 > flaVAN14F20.blobDB.bestsumorder.table.other.contig_ids.txt
+
+# remove contaminants from the original fasta file
+seqtk subseq flaVAN14F20.pilon.purged.fasta flaVAN14F20.blobDB.bestsumorder.table.Arthropoda.contig_ids.txt > flaVAN14F20.pilon.purged.Arthropoda.fasta
+
+
+## rename the assembly and its contigs
+/ceph/software/assemblage/fastaqual_select.pl -f flaVAN14F20.pilon.purged.Arthropoda.fasta -rename flaVAN14F20. > flaVAN14F20.ctg.v0.fa
+
+
+## assembly stats
+assemblage/scaffold_stats.pl -f flaVAN14F20.ctg.v0.fa
+
+
+## BUSCO nucleotides
+busco -i flaVAN14F20.ctg.v0.fa -l diptera_odb10 -o flaVAN14F20.ctg.v0.genome -m genome -c 20
+
+
+## Annotation: repeats
+# build database
+/ceph/software/repeatmodeler/RepeatModeler.v2.0.1/BuildDatabase -name drosophila_flavomontana -engine ncbi flaVAN14F20.ctg.v0.fa
+
+# RepeatModeler
+/ceph/software/repeatmodeler/RepeatModeler.v2.0.1/RepeatModeler -engine ncbi -pa 64 -database drosophila_flavomontana > flaVAN14F20.ctg.v0.repeatmodeler.stdout.log 2> flaVAN14F20.ctg.v0.repeatmodeler.stderr.log && touch flaVAN14F20.ctg.v0.repeatmodeler.done && exit
+
+# Repeatmasker
+sconda repeats
+perl /ceph/software/repeatmasker/RepeatMasker-4.1.0/util/queryRepeatDatabase.pl -species drosophila > drosophila.repeat.lib
+cat RM_1725.MonMay250555352020/consensi.fa.classified drosophila.repeat.lib > drosophila.flavomontana.flaVAN14F20.repeat.lib
+
+# RepeatMasker
++path /ceph/software/repeatmasker/RepeatMasker-4.1.0
+perl /ceph/software/repeatmasker/RepeatMasker-4.1.0/RepeatMasker -e ncbi -pa 50 -s -lib drosophila.flavomontana.flaVAN14F20.repeat.lib -dir repeatmasker_final -xsmall -html -gff flaVAN14F20.ctg.v0.fa && exit
+
+# unmasked, softmasked and hardmasked versions
+cp flaVAN14F20.ctg.v0.fa flaVAN14F20.ctg.v0.unmasked.fa
+cp flaVAN14F20.ctg.v0.fa.masked flaVAN14F20.ctg.v0.softmasked.fa
+# and change lower case letters to Ns (hardmasked version)
+perl -pe 'if (m/^>/){next}else{s/[agct]/N/g}' flaVAN14F20.ctg.v0.softmasked.fa > flaVAN14F20.ctg.v0.hardmasked.fa
+
+
+## Annotation: genes
+# D. montana genomes were annotated with D. montana RNAseq data.
+# create directory
+mkdir monJX13F48.ctg.v0.softmasked.genomedir
+
+# map RNAseq data
+STAR --runThreadN 16 --runMode genomeGenerate --outFileNamePrefix monJX13F48.ctg.v0.softmasked. --outTmpDir /scratch/npoikela/monJX13F48.ctg.v0.softmasked_star_tmp --genomeDir monJX13F48.ctg.v0.softmasked.genomedir --genomeFastaFiles monJX13F48.ctg.v0.softmasked.fa
+
+STAR --twopassMode Basic --outSAMtype BAM SortedByCoordinate --runThreadN 16 --readFilesCommand zcat --genomeDir monJX13F48.ctg.v0.softmasked.genomedir --outTmpDir /scratch/npoikela/51_KL_19_F.trim.monSE --outFileNamePrefix 51_KL_19_F.trim.vs.monJX13F48.ctg.v0.softmasked --readFilesIn 51_KL_19_F_3_S4_L001_R1_001.trim.fq.gz,51_KL_19_F_3_S4_L002_R1_001.trim.fq.gz,51_KL_19_F_3_S4_L003_R1_001.trim.fq.gz,51_KL_19_F_3_S4_L004_R1_001.trim.fq.gz,51_KL_19_F_3_S4_L008_R1_001.trim.fq.gz 51_KL_19_F_3_S4_L001_R2_001.trim.fq.gz,51_KL_19_F_3_S4_L002_R2_001.trim.fq.gz,51_KL_19_F_3_S4_L003_R2_001.trim.fq.gz,51_KL_19_F_3_S4_L004_R2_001.trim.fq.gz,51_KL_19_F_3_S4_L008_R2_001.trim.fq.gz
+STAR --twopassMode Basic --outSAMtype BAM SortedByCoordinate --runThreadN 16 --readFilesCommand zcat --genomeDir monJX13F48.ctg.v0.softmasked.genomedir --outTmpDir /scratch/npoikela/47_KL_19_M.trim.monSE --outFileNamePrefix 47_KL_19_M.trim.vs.monJX13F48.ctg.v0.softmasked --readFilesIn 47_KL_19_M_2_S11_L001_R1_001.trim.fq.gz,47_KL_19_M_2_S11_L002_R1_001.trim.fq.gz,47_KL_19_M_2_S11_L003_R1_001.trim.fq.gz,47_KL_19_M_2_S11_L004_R1_001.trim.fq.gz,47_KL_19_M_2_S11_L008_R1_001.trim.fq.gz 47_KL_19_M_2_S11_L001_R2_001.trim.fq.gz,47_KL_19_M_2_S11_L002_R2_001.trim.fq.gz,47_KL_19_M_2_S11_L003_R2_001.trim.fq.gz,47_KL_19_M_2_S11_L004_R2_001.trim.fq.gz,47_KL_19_M_2_S11_L008_R2_001.trim.fq.gz
+STAR --twopassMode Basic --outSAMtype BAM SortedByCoordinate --runThreadN 16 --readFilesCommand zcat --genomeDir monJX13F48.ctg.v0.softmasked.genomedir --outTmpDir /scratch/npoikela/85_KL_6_F.trim.monSE --outFileNamePrefix 85_KL_6_F.trim.vs.monJX13F48.ctg.v0.softmasked --readFilesIn 85_KL_6_F_2_S2_L001_R1_001.trim.fq.gz,85_KL_6_F_2_S2_L002_R1_001.trim.fq.gz,85_KL_6_F_2_S2_L003_R1_001.trim.fq.gz,85_KL_6_F_2_S2_L004_R1_001.trim.fq.gz,85_KL_6_F_2_S2_L008_R1_001.trim.fq.gz 85_KL_6_F_2_S2_L001_R2_001.trim.fq.gz,85_KL_6_F_2_S2_L002_R2_001.trim.fq.gz,85_KL_6_F_2_S2_L003_R2_001.trim.fq.gz,85_KL_6_F_2_S2_L004_R2_001.trim.fq.gz,85_KL_6_F_2_S2_L008_R2_001.trim.fq.gz
+STAR --twopassMode Basic --outSAMtype BAM SortedByCoordinate --runThreadN 16 --readFilesCommand zcat --genomeDir monJX13F48.ctg.v0.softmasked.genomedir --outTmpDir /scratch/npoikela/96_KL_6_M.trim.monSE --outFileNamePrefix 96_KL_6_M.trim.vs.monJX13F48.ctg.v0.softmasked --readFilesIn 96_KL_6_M_5_S9_L001_R1_001.trim.fq.gz,96_KL_6_M_5_S9_L002_R1_001.trim.fq.gz,96_KL_6_M_5_S9_L003_R1_001.trim.fq.gz,96_KL_6_M_5_S9_L004_R1_001.trim.fq.gz,96_KL_6_M_5_S9_L008_R1_001.trim.fq.gz 96_KL_6_M_5_S9_L001_R2_001.trim.fq.gz,96_KL_6_M_5_S9_L002_R2_001.trim.fq.gz,96_KL_6_M_5_S9_L003_R2_001.trim.fq.gz,96_KL_6_M_5_S9_L004_R2_001.trim.fq.gz,96_KL_6_M_5_S9_L008_R2_001.trim.fq.gz
+
+# run braker2
+export AUGUSTUS_CONFIG_PATH=/ceph/software/augustus/augustus-3.3.3/config/ && \
+export GENEMARK_PATH=/ceph/software/genemark/gm_et_linux_64.20200108/ && \
+export ALIGNMENT_TOOL_PATH=/ceph/software/genomethreader/gth-1.7.1-Linux_x86_64-64bit/bin/ && \
+export AUGUSTUS_SCRIPTS_PATH=/ceph/software/conda/envs/annotation/bin/ && \
+export AUGUSTUS_BIN_PATH=/ceph/software/conda/envs/annotation/bin/ && \
+braker.pl --verbosity=3 --workingdir=monJX13F48.ctg.v0.softmasked.braker --cores 30 --gff3 --softmasking --genome=monJX13F48.ctg.v0.softmasked.fa --useexisting --species=drosophila_montana --bam=47_KL_19_M.trim.vs.monJX13F48.ctg.v0.softmaskedAligned.sortedByCoord.out.bam,51_KL_19_F.trim.vs.monJX13F48.ctg.v0.softmaskedAligned.sortedByCoord.out.bam,96_KL_6_M.trim.vs.monJX13F48.ctg.v0.softmaskedAligned.sortedByCoord.out.bam,85_KL_6_F.trim.vs.monJX13F48.ctg.v0.softmaskedAligned.sortedByCoord.out.bam &> monJX13F48.ctg.v0.softmasked.braker.log
+
+# rename output files
+cp monJX13F48.ctg.v0.softmasked.braker/augustus.hints.aa .
+cp monJX13F48.ctg.v0.softmasked.braker/augustus.hints.gtf .
+cp monJX13F48.ctg.v0.softmasked.braker/augustus.hints.codingseq .
+cp monJX13F48.ctg.v0.softmasked.braker/augustus.hints.gff3 .
+
+/ceph/software/assemblage/fastaqual_select.pl -f augustus.hints.aa -prefix monJX13F48. > monJX13F48.ctg.v0.braker.aa.faa
+/ceph/software/assemblage/fastaqual_select.pl -f augustus.hints.codingseq -prefix monJX13F48. > monJX13F48.ctg.v0.braker.cds.fna
+cp augustus.hints.gtf monJX13F48.ctg.v0.braker.gtf
+cp augustus.hints.gff3 monJX13F48.ctg.v0.braker.gff3
+
+# BUSCO proteins
+busco -f -i monJX13F48.ctg.v0.braker.aa.faa -l diptera_odb10 -o monJX13F48.ctg.v0.softmasked.busco -m proteins -c 48
+
+# D. flavomontana genomes were annotated with D. montana proteins.
+# run braker2
+export AUGUSTUS_CONFIG_PATH=/ceph/software/augustus/augustus-3.3.3/config/ && \
+export GENEMARK_PATH=/ceph/software/genemark/gm_et_linux_64.20200108/ && \
+export ALIGNMENT_TOOL_PATH=/ceph/software/genomethreader/gth-1.7.0-Linux_x86_64-64bit/bin/ && \
+export AUGUSTUS_SCRIPTS_PATH=/ceph/software/conda/envs/annotation/bin/ && \
+export AUGUSTUS_BIN_PATH=/ceph/software/conda/envs/annotation/bin/ && \
+braker.pl --verbosity=3 --workingdir=/scratch/npoikela/flaVAN14F20.ctg.v0.softmasked.braker --cores 48 --gff3 --softmasking --genome=flaVAN14F20.ctg.v0.softmasked.fa --useexisting --prot_seq=monJX13F48.ctg.v0.braker.aa.faa --prg=gth --trainFromGth &> flaVAN14F20.ctg.v0.softmasked.braker.log
+
+# rename output files
+cp flaVAN14F20.ctg.v0.softmasked.braker/augustus.hints.aa .
+cp flaVAN14F20.ctg.v0.softmasked.braker/augustus.hints.gtf .
+cp flaVAN14F20.ctg.v0.softmasked.braker/augustus.hints.codingseq .
+cp flaVAN14F20.ctg.v0.softmasked.braker/augustus.hints.gff3 .
+
+/ceph/software/assemblage/fastaqual_select.pl -f augustus.hints.aa -prefix flaVAN14F20. > flaVAN14F20.ctg.v0.braker.aa.faa
+/ceph/software/assemblage/fastaqual_select.pl -f augustus.hints.codingseq -prefix flaVAN14F20. > flaVAN14F20.ctg.v0.braker.cds.fna
+cp augustus.hints.gtf flaVAN14F20.ctg.v0.braker.gtf
+cp augustus.hints.gff3 flaVAN14F20.ctg.v0.braker.gff3
+
+# BUSCO proteins
+busco -f -i flaVAN14F20.ctg.v0.braker.aa.faa -l diptera_odb10 -o flaVAN14F20.ctg.v0.softmasked.busco -m proteins -c 48
+
+
+
+
+## Scaffolding
+# scaffolding monSE13F37 (chromosome-level genome)
+# scaffolding with monJX13F48 does not improve the assembly
+# scaffolding with Dlummei genome improves the assembly, but contigs belonging to chromosome 4 had to be reverted due to lummei inversion on that chromosome (monSE13F37.00004 + -> -)
+ragtag.py scaffold Dlummei.fa monSE13F37.ctg.v0.unmasked.fa -i 0.6 -o ragtag_output_monSE13F37_scaffolded_with_Dlummeiref
+ragtag.py agp2fa ragtag.scaffold.monSE13F37.00004.reverted.agp monSE13F37.ctg.v0.unmasked.fa > ragtag.scaffold.reverted.fasta
+cat chromosome_X_RagTag.fa chromosome_2L_RagTag.fa chromosome_2R_RagTag.fa virilis.scaffold_13049.chrom.3_RagTag_RagTag.fa virilis.scaffold_12963.chrom.4_RagTag_RagTag_reverted.fa virilis.scaffold_12875.chrom.5_RagTag_RagTag.fa > D_montana.ref_genome.unmasked.fa
+samtools faidx D_montana.ref_genome.unmasked.fa
+
+# contigs that were not assigned to chromosomes
+comm -13 <(sort -u monSE13F37.contigs_assigned_to_chromosomes.txt) <(sort -u monSE13F37.all_contigs.txt) > monSE13F37.contigs_not_assigned_to_chromosomes.txt
+seqtk subseq monSE13F37.ctg.v0.unmasked.fa monSE13F37.contigs_not_assigned_to_chromosomes.txt > monSE13F37.contigs_not_assigned_to_chromosomes.fa
+/ceph/software/assemblage/fastaqual_select.pl -s L -rename contig. -f monSE13F37.contigs_not_assigned_to_chromosomes.fa > monSE13F37.contigs_not_assigned_to_chromosomes.renamed.fa
+cat D_montana.ref_genome.unmasked.fa monSE13F37.contigs_not_assigned_to_chromosomes.renamed.fa > D_montana.ref_genome.all_regions.unmasked.fa
+
+
+# scaffolding flaMT13F11 (chromosome-level genome)
+# scaffolding with flaVAN14F20 improves the assembly
+ragtag.py scaffold flaVAN14F20.ctg.v0.unmasked.fa flaMT13F11.ctg.v0.unmasked.fa -i 0.6 -o ragtag_output_flaMT13F11_scaffolded_with_flaVAN14F20
+# scaffolding with Dlummei reference genome, but contigs belonging to chromosome 4 had to be reverted due to an inversion on that chromosome
+ragtag.py scaffold Dlummei.fa ragtag_output_flaMT13F11_scaffolded_with_flaVAN14F20/ragtag.scaffold.fasta -i 0.6 -o ragtag_output_flaMT13F11_scaffolded_with_flaVAN14F20_and_then_scaffolded_with_Dlummeiref
+ragtag.py agp2fa ragtag_output_flaMT13F11_scaffolded_with_flaVAN14F20_and_then_scaffolded_with_Dlummeiref/ragtag.scaffold.flaMT13F11.00003and00008.reverted.agp ragtag_output_flaMT13F11_scaffolded_with_flaVAN14F20/ragtag.scaffold.fasta > ragtag_output_flaMT13F11_scaffolded_with_flaVAN14F20_and_then_scaffolded_with_Dlummeiref/ragtag.scaffold.flaMT13F11.00003and00008.reverted.fa
+cat flaMT13F11.00001.fa flaVAN14F20.00004_RagTag.fa flaVAN14F20.00005_RagTag.fa virilis.scaffold_13049.chrom.3_RagTag_RagTag.fa virilis.scaffold_12963.chrom.4_RagTag_RagTag.fa virilis.scaffold_12875.chrom.5_RagTag_RagTag.fa > D_flavomontana.ref_genome.unmasked.fa
+samtools faidx D_flavomontana.ref_genome.unmasked.fa
+
+# how about contigs that were not assigned to chromosomes
+comm -13 <(sort -u flaMT13F11.contigs_assigned_to_chromosomes.txt) <(sort -u flaMT13F11.all_contigs.txt) > flaMT13F11.contigs_not_assigned_to_chromosomes.txt
+seqtk subseq flaMT13F11.ctg.v0.unmasked.fa flaMT13F11.contigs_not_assigned_to_chromosomes.txt > flaMT13F11.contigs_not_assigned_to_chromosomes.fa
+/ceph/software/assemblage/fastaqual_select.pl -s L -rename contig. -f flaMT13F11.contigs_not_assigned_to_chromosomes.fa > flaMT13F11.contigs_not_assigned_to_chromosomes.renamed.fa
+cat D_flavomontana.ref_genome.unmasked.fa flaMT13F11.contigs_not_assigned_to_chromosomes.renamed.fa > D_flavomontana.ref_genome.all_regions.unmasked.fa
+/ceph/software/assemblage/scaffold_stats.pl -f D_flavomontana.ref_genome.all_regions.unmasked.fa
+
+
+
+
+## Chromosome synteny
+Usage: minimap2multisynteny.py -g <STR> -l <STR> -a <STR> [-c <INT> -t <FLT> -h]
+
+# genomefile: D. virilis > 2mb contigs, orientation and name
+virilis.scaffold_13042.chrom.X	5191987	+	v_X.1
+virilis.scaffold_12928.chrom.X	7717345	+	v_X.2
+virilis.scaffold_12932.chrom.X	2102469	+	v_X.4
+virilis.scaffold_12726.chrom.X	2840439	+	v_X.5
+virilis.scaffold_12970.chrom.X	11907090	+	v_X.3
+virilis.scaffold_13047.chrom.2	19223366	-	v_2.1
+virilis.scaffold_12855.chrom.2	10161210	+	v_2.2
+virilis.scaffold_13049.chrom.3	25233164	-	v_3
+virilis.scaffold_12723.chrom.4	5802038	+	v_4.2
+virilis.scaffold_12963.chrom.4	20206255	+	v_4.1
+virilis.scaffold_12875.chrom.5	20611582	+	v_5
+
+# genomefile: D. lummei > 2mb contigs, orientation and name
+Dlummei.00001	29939219	+	l_X
+Dlummei.00003	21686393	+	l_2
+Dlummei.00008	3417677	+	l_2
+Dlummei.00010	2125645	+	l_2
+Dlummei.00005	15103916	+	l_3
+Dlummei.00004	18946740	+	l_4
+Dlummei.00007	5143941	+	l_4
+Dlummei.00006	5707116	+	l_4
+Dlummei.00002	24727032	+	l_5
+
+# genomefile: D. montana > 2mb contigs, orientation and name
+monSE13F37.00001	29140820	+	m_X
+monSE13F37.00002	20245637	+	m_2L
+monSE13F37.00005	10997687	+	m_2R
+monSE13F37.00006	5767499	+	m_3.1
+monSE13F37.00007	3775224	+	m_3.2
+monSE13F37.00010	2178246	+	m_3.3
+monSE13F37.00004	12274228	+	m_4.1
+monSE13F37.00009	2530810	+	m_4.3
+monSE13F37.00008	2568140	+	m_4.2
+monSE13F37.00003	19534505	+	m_5
+
+# genomefile: D. flavomontana > 2mb contigs, orientation and name
+flaMT13F11.00001	28975156	+	f_X
+flaMT13F11.00006	9776843	+	f_2L.2
+flaMT13F11.00005	10178141	-	f_2L.1
+flaMT13F11.00004	10393190	-	f_2R
+flaMT13F11.00007	7754770	-	f_3.1
+flaMT13F11.00010	2473142	+	f_3.3
+flaMT13F11.00009	3073694	+	f_3.2
+flaMT13F11.00011	2460368	+	f_3.4
+flaMT13F11.00012	2261038	+	f_3.5
+flaMT13F11.00013	2022541	+	f_3.6
+flaMT13F11.00003	19965754	+	f_4.1
+flaMT13F11.00008	5486619	+	f_4.2
+flaMT13F11.00002	23523717	+	f_5
+
+nano genome_file.txt
+virilis.genomefile
+lummei..genomefile
+flavomontana.genomefile
+montana.genomfile
+
+minimap2 -x asm10 Dlummei.fa Dvirilis.fa > lummei_virilis
+minimap2 -x asm10 flaMT13F11.ctg.v0.hardmasked.fa lummei.fa > flavomontana_lummei
+minimap2 -x asm10 monSE13F37.ctg.v0.hardmasked.fa flaMT13F11.ctg.v0.hardmasked.fa > montana_flavomontana
+
+awk -v OFS='\t' '{ if($12=="60" ) print }' lummei_virilis > lummei_virilis.mapq60
+awk -v OFS='\t' '{ if($12=="60" ) print }' flavomontana_lummei > flavomontana_lummei.mapq60
+awk -v OFS='\t' '{ if($12=="60" ) print }' montana_flavomontana > montana_flavomontana.mapq60
+
+cut -f1,3,4,6,8,9 lummei_virilis.mapq60 > lummei_virilis.mapq60.liftover.txt
+cut -f1,3,4,6,8,9 flavomontana_lummei.mapq60 > flavomontana_lummei.mapq60.liftover.txt
+cut -f1,3,4,6,8,9 montana_flavomontana.mapq60 > montana_flavomontana.mapq60.liftover.txt
+
+python contigs_to_chroms.py color_value_to_contig.virilis.txt lummei_virilis.mapq60.liftover.txt > lummei_virilis.mapq60.liftover.col_specific.txt
+python contigs_to_chroms.py color_value_to_contig.lummei.txt flavomontana_lummei.mapq60.liftover.txt > flavomontana_lummei.mapq60.liftover.col_specific.txt
+python contigs_to_chroms.py color_value_to_contig.flavomontana.txt montana_flavomontana.mapq60.liftover.txt > montana_flavomontana.mapq60.liftover.col_specific.txt
+
+# colors
+Dlummei.00001	6
+Dlummei.00003	1
+Dlummei.00008	1
+Dlummei.00010	1
+Dlummei.00005	3
+Dlummei.00004	4
+Dlummei.00006	4
+Dlummei.00007	4
+Dlummei.00002	5
+
+virilis.scaffold_13042.chrom.X	6
+virilis.scaffold_12928.chrom.X	6
+virilis.scaffold_12970.chrom.X	6
+virilis.scaffold_12932.chrom.X	6
+virilis.scaffold_12726.chrom.X	6
+virilis.scaffold_13047.chrom.2	1
+virilis.scaffold_12855.chrom.2	1
+virilis.scaffold_13049.chrom.3	3
+virilis.scaffold_12963.chrom.4	4
+virilis.scaffold_12723.chrom.4	4
+virilis.scaffold_12875.chrom.5	5
+
+monSE13F37.00001 6
+monSE13F37.00002 1
+monSE13F37.00005 2
+monSE13F37.00006 3
+monSE13F37.00007 3
+monSE13F37.00010 3
+monSE13F37.00004 4
+monSE13F37.00009 4
+monSE13F37.00008 4
+monSE13F37.00003 5
+
+flaMT13F11.00001	6
+flaMT13F11.00006	1
+flaMT13F11.00005	1
+flaMT13F11.00004	2
+flaMT13F11.00007	3
+flaMT13F11.00009	3
+flaMT13F11.00010	3
+flaMT13F11.00011	3
+flaMT13F11.00012	3
+flaMT13F11.00013	3
+flaMT13F11.00003	4
+flaMT13F11.00008	4
+flaMT13F11.00002	5
+
+nano liftover_files.txt
+lummei_virilis.mapq60.liftover.col_specific.txt
+flavomontana_lummei.mapq60.liftover.col_specific.txt
+montana_flavomontana.mapq60.liftover.col_specific.txt
+
+nano gap_size_list.txt
+6_500_000
+8_800_000
+5_500_000
+9_500_000
+
+Usage: minimap2multisynteny.py -g <STR> -l <STR> -a <STR> [-c <INT> -t <FLT> -h]
+
+python3 minimap2multisynteny.py -g genome_file.txt -l liftover_files.txt -a gap_size_list.txt
